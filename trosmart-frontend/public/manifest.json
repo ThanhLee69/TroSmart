@@ -1,0 +1,9 @@
+{
+  "short_name": "TROSMART",
+  "name": "TROSMART - Ngôi nhà thông minh",
+  "icons": [
+    { "src": "favicon.ico", "sizes": "48x48", "type": "image/x-icon" },
+    { "src": "icon-192.png", "type": "image/png", "sizes": "192x192" },
+    { "src": "icon-512.png", "type": "image/png", "sizes": "512x512" }
+  ]
+}

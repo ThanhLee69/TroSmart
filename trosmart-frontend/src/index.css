@@ -1,0 +1,67 @@
+/* =========================
+   FONT CHỮ TOÀN HỆ THỐNG
+========================= */
+
+@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap");
+
+/* Reset CSS cơ bản */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Font mặc định */
+html,
+body,
+#root {
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: "Be Vietnam Pro", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Các phần tử nhập liệu và nút bấm */
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Đồng bộ font với Ant Design */
+.ant-typography,
+.ant-btn,
+.ant-input,
+.ant-input-number,
+.ant-select,
+.ant-select-selector,
+.ant-form-item-label > label,
+.ant-modal-title,
+.ant-checkbox-wrapper,
+.ant-radio-wrapper,
+.ant-table,
+.ant-menu,
+.ant-card,
+.ant-tabs,
+.ant-pagination,
+.ant-dropdown,
+.ant-drawer,
+.ant-message,
+.ant-notification {
+  font-family: "Be Vietnam Pro", sans-serif;
+}
+
+/* Nền chung ứng dụng */
+body {
+  background: #f7f6f6;
+}
+
+/* Font dành riêng cho code */
+code,
+pre {
+  font-family:
+    source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}

@@ -1,0 +1,334 @@
+/* ===== Modal khách thuê ===== */
+.tf-modal .ant-modal-content {
+  padding: 0;
+  border-radius: 14px;
+  overflow: hidden;
+}
+.tf-modal .ant-modal-header {
+  margin: 0;
+  padding: 18px 24px;
+  background: linear-gradient(135deg, #f3f5ff 0%, #fff 100%);
+  border-bottom: 1px solid #eef0f6;
+}
+.tf-modal .ant-modal-body {
+  padding: 20px 24px 8px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.tf-modal .ant-modal-footer {
+  margin: 0;
+  padding: 14px 24px 18px;
+  border-top: 1px solid #f0f2f7;
+}
+
+.tf-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.tf-title__icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+  color: #fff;
+  background: linear-gradient(135deg, #7c8cf2, #536ee7);
+  box-shadow: 0 6px 14px rgba(83, 110, 231, 0.3);
+}
+.tf-title__main {
+  font-size: 17px;
+  font-weight: 700;
+  color: #1f2a5a;
+  line-height: 1.3;
+}
+.tf-title__sub {
+  margin-top: 2px;
+  font-size: 12.5px;
+  font-weight: 400;
+  color: #8890b0;
+}
+
+/* Tabs */
+.tf-tabs.ant-segmented {
+  margin-bottom: 18px;
+  padding: 4px;
+  background: #f1f3fb;
+  border-radius: 10px;
+}
+.tf-tabs .ant-segmented-item {
+  border-radius: 7px;
+  font-weight: 500;
+}
+.tf-tabs .ant-segmented-item-selected {
+  color: #536ee7;
+  box-shadow: 0 2px 8px rgba(83, 110, 231, 0.16);
+}
+.tf-tabs .ant-segmented-thumb {
+  border-radius: 7px;
+}
+
+/* Tiêu đề nhóm */
+.tf-sec {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 2px 0 12px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #536ee7;
+}
+.tf-sec::before {
+  content: "";
+  width: 4px;
+  height: 14px;
+  border-radius: 2px;
+  background: #536ee7;
+}
+.tf-sec::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #eef0f6;
+}
+.tf-modal .ant-row + .ant-row {
+  margin-top: 0;
+}
+.tf-modal .ant-col + .ant-col > .tf-sec {
+  margin-top: 6px;
+}
+
+/* Ô nhập: cao 40px, bo vừa */
+.tf-modal .ant-form-item {
+  margin-bottom: 16px;
+}
+.tf-modal .ant-form-item-label > label {
+  font-weight: 500;
+  color: #3b4263;
+}
+.tf-modal .ant-input,
+.tf-modal .ant-input-affix-wrapper,
+.tf-modal .ant-picker,
+.tf-modal .ant-select-selector {
+  border-radius: 8px !important;
+}
+.tf-modal .ant-input:not(textarea),
+.tf-modal .ant-input-affix-wrapper:not(.ant-input-textarea-affix-wrapper),
+.tf-modal .ant-picker {
+  min-height: 40px;
+}
+.tf-modal .ant-input-affix-wrapper > input.ant-input {
+  min-height: 0;
+}
+.tf-modal textarea.ant-input {
+  padding-block: 10px;
+}
+.tf-modal .ant-radio-group {
+  display: flex;
+  width: 100%;
+}
+.tf-modal .ant-radio-button-wrapper {
+  flex: 1;
+  text-align: center;
+  height: 40px;
+  line-height: 38px;
+}
+.tf-modal .ant-radio-button-wrapper:first-child {
+  border-radius: 8px 0 0 8px;
+}
+.tf-modal .ant-radio-button-wrapper:last-child {
+  border-radius: 0 8px 8px 0;
+}
+.tf-modal
+  .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
+  background: #536ee7;
+  border-color: #536ee7;
+}
+
+.tf-modal .ant-select-single {
+  height: 40px;
+  width: 100%;
+}
+.tf-modal .ant-select-single .ant-select-selector {
+  height: 40px !important;
+  align-items: center;
+}
+.tf-modal .ant-select-single .ant-select-selection-search-input {
+  height: 38px !important;
+}
+
+/* Ảnh CCCD */
+.tf-up {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 100%;
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid #eef0f6;
+  border-radius: 10px;
+  background: #fff;
+}
+.tf-up__title {
+  color: #1f2a5a;
+}
+.tf-up__box {
+  min-height: 190px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #f8f9fe;
+  border: 1.5px dashed #cdd4f5;
+}
+.tf-up__box.has-img {
+  border-style: solid;
+  border-color: #e3e7fa;
+  background: #fafbff;
+}
+.tf-up__img {
+  max-width: 100%;
+  max-height: 190px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+.tf-up__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: #aab2dc;
+}
+.tf-up__empty .anticon {
+  font-size: 40px;
+}
+.tf-up__empty span {
+  font-size: 13px;
+  color: #9aa2c8;
+}
+.tf-up__side {
+  text-align: center;
+  font-size: 12px;
+  color: #8890b0;
+}
+.tf-up .ant-upload,
+.tf-up .ant-upload-wrapper {
+  width: 100%;
+}
+.tf-up .ant-btn {
+  border-radius: 8px;
+  height: 40px;
+}
+
+.tf-identity {
+  min-width: 0;
+  overflow: hidden;
+}
+.tf-hint {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: #f3f5ff;
+  color: #5a6393;
+  font-size: 12.5px;
+  line-height: 1.6;
+}
+.tf-hint .anticon {
+  margin-top: 4px;
+  color: #536ee7;
+}
+
+/* Footer */
+.tf-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  width: 100%;
+}
+.tf-footer.is-mobile {
+  flex-direction: column-reverse;
+}
+.tf-footer .ant-btn {
+  height: 40px;
+  border-radius: 8px;
+  padding-inline: 20px;
+}
+.tf-btn-primary.ant-btn-primary {
+  background: #536ee7;
+  box-shadow: 0 4px 12px rgba(83, 110, 231, 0.28);
+}
+.tf-btn-primary.ant-btn-primary:hover:not(:disabled) {
+  background: #4059d6;
+}
+
+@media (max-width: 575px) {
+  .tf-modal .ant-modal-header {
+    padding: 14px 16px;
+  }
+  .tf-modal .ant-modal-body {
+    padding: 16px 16px 4px;
+  }
+  .tf-modal .ant-modal-footer {
+    padding: 12px 16px 16px;
+  }
+}
+
+/* ===== Ô số: cao bằng ô nhập ===== */
+.tf-modal .ant-input-number {
+  width: 100%;
+  height: 40px;
+  border-radius: 8px;
+}
+.tf-modal .ant-input-number .ant-input-number-input {
+  height: 38px;
+}
+
+/* ===== Tiện nghi dạng chip (không viền) ===== */
+.rf-amenities .ant-checkbox-wrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 9px 12px;
+  border: 0;
+  border-radius: 8px;
+  background: #f5f6fc;
+  color: #3b4263;
+  font-size: 13.5px;
+  line-height: 1.4;
+  transition:
+    background 0.15s,
+    color 0.15s;
+}
+.rf-amenities .ant-checkbox-wrapper > span:last-child {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.rf-amenities .ant-checkbox-wrapper:hover {
+  background: #eceffb;
+}
+.rf-amenities .ant-checkbox-wrapper-checked {
+  background: #e6ebff;
+  color: #3347b8;
+  font-weight: 500;
+}
+.rf-amenities .ant-checkbox-checked .ant-checkbox-inner {
+  background-color: #536ee7;
+  border-color: #536ee7;
+}
+
+@media (max-width: 575px) {
+  .rf-amenities .ant-checkbox-wrapper {
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+}

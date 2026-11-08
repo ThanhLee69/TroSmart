@@ -1,0 +1,463 @@
+/* ===== Banner trang chủ + ô tìm phòng ===== */
+.hb {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 15px 24px 40px;
+}
+
+.hb *,
+.hb *::before,
+.hb *::after {
+  box-sizing: border-box;
+}
+
+/* ---------- Banner ---------- */
+.hb-hero {
+  --hb-overlay: linear-gradient(
+    90deg,
+    rgba(10, 16, 58, 0.88) 0%,
+    rgba(20, 30, 88, 0.68) 38%,
+    rgba(36, 56, 147, 0.2) 68%,
+    rgba(36, 56, 147, 0) 100%
+  );
+
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  min-height: 500px;
+  padding: 76px 40px 150px;
+  overflow: hidden;
+  border-radius: 24px;
+  background-color: #1c2766;
+  background-image: var(--hb-overlay), var(--hb-banner);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.hb-hero__content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  color: #fff;
+}
+
+.hb-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  background: rgba(160, 180, 255, 0.18);
+  color: #f0f3ff;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  backdrop-filter: blur(6px);
+}
+
+.hb-eyebrow::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #8fa2ff;
+  box-shadow: 0 0 0 3px rgba(143, 162, 255, 0.3);
+}
+
+.hb-hero__title {
+  max-width: 440px;
+  margin: 18px 0 14px;
+  color: #fff;
+  font-size: clamp(30px, 3.4vw, 46px);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.hb-hero__lead {
+  max-width: 440px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.86);
+  font-size: clamp(14px, 1.2vw, 16px);
+  line-height: 1.75;
+}
+
+/* ---------- Cụm ảnh so le bên phải banner ---------- */
+.hb-collage {
+  position: absolute;
+  z-index: 1;
+  top: 44px;
+  right: 64px;
+  bottom: 122px;
+  width: min(42%, 500px);
+}
+
+/* Khung kính mờ phía sau: tách cụm ảnh khỏi ảnh nền */
+.hb-collage__frame {
+  position: absolute;
+  inset: -20px -22px -20px -22px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 34px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+/* Vòm màu xanh lệch xuống phải, như một viền tô màu sau ảnh lớn */
+.hb-collage__arch {
+  position: absolute;
+  top: 16px;
+  right: -14px;
+  width: 54%;
+  height: 100%;
+  border-radius: 999px 999px 22px 22px;
+  background: linear-gradient(165deg, #9fb0ff 0%, #4a5be0 100%);
+  opacity: 0.95;
+}
+
+.hb-collage__item {
+  position: absolute;
+  overflow: hidden;
+  border: 4px solid #fff;
+  background: #dfe4fb;
+  box-shadow: 0 24px 40px -22px rgba(5, 10, 50, 0.75);
+}
+
+.hb-collage__item img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Ảnh lớn: hình vòm */
+.hb-collage__main {
+  top: 0;
+  right: 0;
+  width: 54%;
+  height: 100%;
+  border-radius: 999px 999px 22px 22px;
+}
+
+/* Ảnh ngang: đè lên góc trái dưới của ảnh vòm */
+.hb-collage__side {
+  bottom: 0;
+  left: 2%;
+  width: 56%;
+  height: 44%;
+  border-radius: 22px;
+}
+
+/* Ảnh tròn nhỏ: lệch lên phía trên bên trái */
+.hb-collage__small {
+  top: 10%;
+  left: 0;
+  width: 30%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+}
+
+/* Vòng tròn viền mảnh làm điểm nhấn */
+.hb-collage__ring {
+  position: absolute;
+  top: -44px;
+  right: -48px;
+  width: 96px;
+  height: 96px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+}
+
+/* ---------- Form nổi ---------- */
+.hb-form {
+  --place-h: 44px;
+
+  position: relative;
+  z-index: 5;
+  width: calc(100% - 64px);
+  max-width: 1100px;
+  margin: -92px auto 0;
+  padding: 18px 22px 24px;
+  border: 1px solid #e6eaf6;
+  border-radius: 22px;
+  background: #fff;
+  box-shadow:
+    0 28px 56px -28px rgba(25, 40, 85, 0.45),
+    0 2px 6px rgba(25, 40, 85, 0.06);
+}
+
+/* Hàng đầu form: hai tab bên trái, ghi chú bên phải */
+.hb-form__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  margin-bottom: 18px;
+}
+
+.hb-form__note {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #5b6385;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.hb-form__note .anticon {
+  color: #159f83;
+}
+
+/* Hai tab: theo khu vực / theo vị trí */
+.hb-tabs {
+  display: inline-grid;
+  grid-auto-flow: column;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 12px;
+  background: #f1f3fb;
+}
+
+.hb-tab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 38px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: #4a5385;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    color 0.15s,
+    box-shadow 0.15s;
+}
+
+.hb-tab:hover {
+  background: #e6e9fb;
+  color: #3b4bcb;
+}
+
+.hb-tab--on,
+.hb-tab--on:hover {
+  background: linear-gradient(135deg, #6b82f2, #4a5be0);
+  color: #fff;
+  box-shadow: 0 8px 16px -8px rgba(74, 91, 224, 0.7);
+}
+
+.hb-tab:focus-visible {
+  outline: 2px solid #536ee7;
+  outline-offset: 2px;
+}
+
+/* Lưới các ô */
+.hb-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 2.3fr) minmax(0, 1fr) minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 16px;
+}
+
+.hb-field {
+  min-width: 0;
+}
+
+.hb-label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  color: #25335e;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.hb-loc {
+  display: grid;
+  gap: 10px;
+}
+
+.hb-loc--area {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.hb-loc--near {
+  grid-template-columns: minmax(0, 1fr) 132px;
+}
+
+.hb-loc .ant-select,
+.hb-field > .ant-select {
+  width: 100%;
+}
+
+/* Ô nhập: nền xám nhạt, viền mờ, sáng lên khi rê chuột hoặc chọn */
+.hb-form .ant-select:not(.place-input) .ant-select-selector,
+.hb-form .place-input .ant-input-affix-wrapper {
+  border-color: #e3e7f7 !important;
+  background: #f6f7fc !important;
+  box-shadow: none;
+  transition:
+    background 0.15s,
+    border-color 0.15s,
+    box-shadow 0.15s;
+}
+
+.hb-form .ant-select-disabled:not(.place-input) .ant-select-selector {
+  background: #eef0f8 !important;
+  box-shadow: none;
+}
+
+.hb-form
+  .ant-select:not(.ant-select-disabled):not(.place-input):hover
+  .ant-select-selector,
+.hb-form .place-input .ant-input-affix-wrapper:hover {
+  border-color: #aab6f3 !important;
+  background: #fff !important;
+}
+
+.hb-form .ant-select-focused:not(.place-input) .ant-select-selector,
+.hb-form .place-input .ant-input-affix-wrapper-focused {
+  border-color: #4a5be0 !important;
+  background: #fff !important;
+  box-shadow: 0 0 0 3px rgba(74, 91, 224, 0.16) !important;
+}
+
+/* Nút tìm */
+.hb-submit.ant-btn.ant-btn-primary {
+  height: 44px;
+  padding: 0 28px;
+  border: 0;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #4a5be0, #1e3390);
+  color: #fff;
+  font-weight: 700;
+  box-shadow: 0 14px 24px -12px rgba(30, 51, 144, 0.7);
+  transition:
+    transform 0.15s,
+    filter 0.15s;
+}
+
+.hb-submit.ant-btn.ant-btn-primary:hover {
+  background: linear-gradient(135deg, #4a5be0, #1e3390);
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+/* Ghi chú vị trí đã chọn */
+.hb-hint {
+  margin: 14px 0 0;
+  padding: 9px 14px;
+  border-radius: 10px;
+  background: #eef0fd;
+  color: #3b4bcb;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+/* ===== iPad (dưới 992px) ===== */
+@media (max-width: 991px) {
+  .hb-collage {
+    right: 36px;
+    width: 38%;
+  }
+
+  .hb-collage__small {
+    display: none;
+  }
+
+  .hb-hero__title,
+  .hb-hero__lead {
+    max-width: 54%;
+  }
+
+  .hb-hero {
+    padding-right: 28px;
+    padding-left: 28px;
+  }
+
+  .hb-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .hb-field--loc,
+  .hb-submit.ant-btn.ant-btn-primary {
+    grid-column: 1 / -1;
+  }
+
+  .hb-submit.ant-btn.ant-btn-primary {
+    width: 100%;
+  }
+}
+
+/* ===== Điện thoại (dưới 768px) ===== */
+@media (max-width: 767px) {
+  /* Điện thoại: bỏ cụm ảnh để chữ rộng và dễ đọc */
+  .hb-collage {
+    display: none;
+  }
+
+  .hb {
+    padding: 12px 16px 32px;
+  }
+
+  .hb-hero {
+    min-height: 400px;
+    padding: 40px 20px 130px;
+    border-radius: 18px;
+  }
+
+  .hb-hero__title,
+  .hb-hero__lead {
+    max-width: none;
+  }
+
+  /* Điện thoại: phủ tối đều để chữ trắng dễ đọc trên ảnh */
+  .hb-hero {
+    --hb-overlay: linear-gradient(
+      180deg,
+      rgba(10, 16, 58, 0.82) 0%,
+      rgba(20, 30, 88, 0.62) 100%
+    );
+  }
+
+  .hb-form__note {
+    display: none;
+  }
+
+  .hb-form {
+    width: calc(100% - 24px);
+    margin-top: -84px;
+    padding: 14px 14px 18px;
+    border-radius: 16px;
+  }
+
+  .hb-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+  }
+
+  .hb-tab {
+    padding: 0 8px;
+  }
+
+  .hb-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hb-loc--area,
+  .hb-loc--near {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

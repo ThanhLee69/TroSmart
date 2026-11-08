@@ -1,0 +1,174 @@
+/* =========================================================
+   Trang Quản lý tiện ích (AmenityPage)
+   Tiền tố amn- để không đụng CSS của trang khác
+   ========================================================= */
+
+/* Phạm vi áp dụng: nền nhạt, viền màu, chấm màu */
+.amn-scope {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 26px;
+  padding: 0 12px;
+  border: 1px solid;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.amn-scope__dot {
+  flex: 0 0 auto;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  position: relative;
+  top: 1px;
+}
+
+/* =========================================================
+   Modal Thêm / Cập nhật tiện ích (AmenityForm)
+   Tiền tố af- để không đụng CSS của trang khác
+   ========================================================= */
+.af-modal .ant-modal-content {
+  padding: 0;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.af-modal .ant-modal-header {
+  margin: 0;
+  padding: 18px 24px;
+  background: linear-gradient(135deg, #f3f5ff 0%, #fff 100%);
+  border-bottom: 1px solid #eef0f6;
+}
+
+.af-modal .ant-modal-body {
+  padding: 20px 24px 8px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.af-modal .ant-modal-footer {
+  margin: 0;
+  padding: 14px 24px 18px;
+  border-top: 1px solid #f0f2f7;
+}
+
+/* Tiêu đề */
+.af-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.af-title__icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  font-size: 18px;
+  color: #fff;
+  background: linear-gradient(135deg, #7c8cf2, #536ee7);
+  box-shadow: 0 6px 14px rgba(83, 110, 231, 0.3);
+}
+
+.af-title__main {
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: #1f2a5a;
+}
+
+.af-title__sub {
+  margin-top: 2px;
+  font-size: 12.5px;
+  font-weight: 400;
+  color: #8890b0;
+}
+
+/* Ô nhập: cao 40px, bo vừa */
+.af-modal .ant-form-item {
+  margin-bottom: 16px;
+}
+
+.af-modal .ant-form-item-label > label {
+  font-weight: 500;
+  color: #3b4263;
+}
+
+.af-modal .ant-input,
+.af-modal .ant-input-affix-wrapper,
+.af-modal .ant-select-selector {
+  border-radius: 8px !important;
+}
+
+.af-modal .ant-input:not(textarea),
+.af-modal .ant-input-affix-wrapper:not(.ant-input-textarea-affix-wrapper) {
+  min-height: 40px;
+}
+
+.af-modal .ant-input-affix-wrapper > input.ant-input {
+  min-height: 0;
+}
+
+.af-modal textarea.ant-input {
+  padding-block: 10px;
+}
+
+.af-modal .ant-select-single {
+  width: 100%;
+  height: 40px;
+}
+
+.af-modal .ant-select-single .ant-select-selector {
+  align-items: center;
+  height: 40px !important;
+}
+
+.af-modal .ant-select-single .ant-select-selection-search-input {
+  height: 40px !important;
+}
+
+/* Chân modal */
+.af-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  width: 100%;
+}
+
+.af-footer.is-mobile {
+  flex-direction: column-reverse;
+}
+
+.af-footer .ant-btn {
+  height: 40px;
+  padding-inline: 20px;
+  border-radius: 8px;
+}
+
+.af-btn-primary.ant-btn-primary {
+  background: #536ee7;
+  box-shadow: 0 4px 12px rgba(83, 110, 231, 0.28);
+}
+
+.af-btn-primary.ant-btn-primary:hover:not(:disabled) {
+  background: #4059d6;
+}
+
+@media (max-width: 575px) {
+  .af-modal .ant-modal-header {
+    padding: 14px 16px;
+  }
+
+  .af-modal .ant-modal-body {
+    padding: 16px 16px 4px;
+  }
+
+  .af-modal .ant-modal-footer {
+    padding: 12px 16px 16px;
+  }
+}

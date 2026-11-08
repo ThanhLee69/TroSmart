@@ -1,0 +1,98 @@
+/* ========================================
+   TRANG DANH SÁCH THÔNG BÁO: BẢNG
+   Dùng chung bảng màu nt-tone-- trong NotificationDialogs.css
+   (file đó đã được modal và drawer import nên luôn có mặt)
+======================================== */
+
+.ntp-table .ant-table-thead > tr > th {
+  background: #f8f9fd;
+  color: #5b6385;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.ntp-table .ant-table-tbody > tr > td {
+  padding-top: 14px;
+  padding-bottom: 14px;
+  vertical-align: middle;
+}
+
+.ntp-table .ant-table-tbody > tr:hover > td {
+  background: #f9faff !important;
+}
+
+/* Tiêu đề + mức ưu tiên */
+.ntp-title {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+/* Tiêu đề màu đen, rê chuột mới đổi xanh */
+.ntp-title .ant-typography {
+  color: #151b3b;
+}
+
+.ntp-title .ant-typography:hover {
+  color: #3b4bcb;
+}
+
+.ntp-prio {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #7a82a6;
+}
+
+.ntp-prio--high {
+  color: #cf1322;
+  font-weight: 600;
+}
+
+/* Loại thông báo: chấm màu + chữ, không có nền */
+.ntp-dot-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #3a4268;
+  font-size: 14px;
+}
+
+/* Trạng thái: chấm màu + chữ trên nền màu nhạt, không viền */
+.ntp-state {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 28px;
+  padding: 0 12px;
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Phân trang dưới bảng */
+.ntp-table .ant-pagination {
+  margin-bottom: 0;
+}
+
+.ntp-table .ant-pagination .ant-pagination-item,
+.ntp-table .ant-pagination .ant-pagination-prev .ant-pagination-item-link,
+.ntp-table .ant-pagination .ant-pagination-next .ant-pagination-item-link {
+  border-radius: 8px;
+}
+
+.ntp-table .ant-pagination .ant-pagination-item-active {
+  border-color: #536ee7;
+  background: #eef0fd;
+}
+
+.ntp-table .ant-pagination .ant-pagination-item-active a {
+  color: #3b4bcb;
+  font-weight: 600;
+}

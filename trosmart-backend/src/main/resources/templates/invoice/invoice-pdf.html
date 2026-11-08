@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head>
+    <meta charset="UTF-8"/>
+    <title th:text="'Hóa đơn ' + ${v.invoiceCode}">Hóa đơn tiền phòng</title>
+    <style type="text/css">
+        /* Chỉ dùng CSS 2.1 (bảng, khối, float) vì OpenHTMLtoPDF không hỗ trợ flex/grid */
+        @page {
+            size: A4;
+            margin: 14mm 16mm 17mm 16mm;
+
+            @bottom-center {
+                content: "Trang " counter(page) " / " counter(pages);
+                font-family: "Liberation Serif", serif;
+                font-size: 9pt;
+                color: #666666;
+            }
+        }
+
+        body {
+            margin: 0;
+            font-family: "Liberation Serif", "Times New Roman", serif;
+            font-size: 11pt;
+            line-height: 1.3;
+            color: #111111;
+        }
+
+        p { margin: 0 0 3pt 0; }
+        .bold { font-weight: bold; }
+        .italic { font-style: italic; }
+        .right { text-align: right; }
+        .center { text-align: center; }
+        .muted { color: #555555; }
+        .num { text-align: right; white-space: nowrap; }
+
+        /* ===== Đầu hóa đơn: bên trái nhà trọ, bên phải số và ngày ===== */
+        table.head { width: 100%; border-collapse: collapse; }
+        table.head td { vertical-align: top; padding: 0; }
+        td.head-left { width: 58%; }
+        td.head-right { width: 42%; text-align: right; }
+        .house { font-size: 14pt; font-weight: bold; margin-bottom: 2pt; }
+        .meta-line { margin: 0 0 1pt 0; font-size: 11pt; }
+
+        .rule { border-top: 2pt solid #1f3a8a; margin: 6pt 0 8pt 0; height: 0; }
+
+        h1 {
+            margin: 0;
+            text-align: center;
+            font-size: 17pt;
+            letter-spacing: 1pt;
+            color: #1f3a8a;
+        }
+        .period { text-align: center; margin: 1pt 0 6pt 0; font-size: 11.5pt; }
+
+        /* ===== Nhãn trạng thái thanh toán ===== */
+        .status-wrap { text-align: center; margin: 0 0 6pt 0; }
+        .status {
+            display: inline-block;
+            padding: 2pt 14pt;
+            border: 1.5pt solid #444444;
+            font-weight: bold;
+            font-size: 11.5pt;
+            letter-spacing: 0.5pt;
+        }
+        .status-paid    { border-color: #1b7f3b; color: #1b7f3b; }
+        .status-unpaid  { border-color: #b45309; color: #b45309; }
+        .status-partial { border-color: #1f3a8a; color: #1f3a8a; }
+        .status-overdue { border-color: #b91c1c; color: #b91c1c; }
+        .status-cancelled { border-color: #6b7280; color: #6b7280; }
+
+        /* ===== Thông tin khách thuê ===== */
+        table.info { width: 100%; border-collapse: collapse; margin-bottom: 4pt; }
+        table.info td { padding: 2pt 0; vertical-align: top; font-size: 11.5pt; }
+        td.info-label { width: 21%; color: #555555; }
+        td.info-value { width: 29%; font-weight: bold; }
+
+        h2 {
+            margin: 8pt 0 3pt 0;
+            font-size: 12pt;
+            color: #1f3a8a;
+            page-break-after: avoid;
+        }
+
+        /* ===== Bảng chi tiết các khoản ===== */
+        table.grid {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0 0 6pt 0;
+        }
+        table.grid th, table.grid td {
+            border: 0.75pt solid #777777;
+            padding: 2pt 5pt;
+            font-size: 10.5pt;
+            line-height: 1.25;
+            vertical-align: top;
+        }
+        table.grid th {
+            background-color: #e8ecf7;
+            font-weight: bold;
+            text-align: center;
+        }
+        table.grid tr { page-break-inside: avoid; }
+        .col-index { width: 28pt; text-align: center; }
+        .detail { display: block; font-size: 9.5pt; color: #555555; font-style: italic; }
+
+        /* ===== Tổng tiền ===== */
+        table.total { width: 52%; margin-left: 48%; border-collapse: collapse; margin-bottom: 4pt; }
+        table.total td { padding: 2pt 5pt; font-size: 11pt; }
+        table.total tr.line td { border-top: 0.75pt solid #999999; }
+        table.total tr.due td {
+            border-top: 1.5pt solid #1f3a8a;
+            border-bottom: 1.5pt solid #1f3a8a;
+            font-weight: bold;
+            font-size: 13pt;
+            color: #1f3a8a;
+        }
+        .words { margin: 2pt 0 6pt 0; }
+
+        /* ===== Khung hướng dẫn thanh toán ===== */
+        .pay-box {
+            margin: 6pt 0 4pt 0;
+            padding: 4pt 9pt;
+            border: 0.75pt solid #999999;
+            background-color: #f6f7fb;
+            page-break-inside: avoid;
+        }
+        .pay-box p { margin: 0 0 2pt 0; }
+        .pay-title { font-weight: bold; color: #1f3a8a; margin-bottom: 3pt; }
+
+        .note { white-space: pre-wrap; margin: 0; }
+
+        /* ===== Chữ ký ===== */
+        .sign-block { page-break-inside: avoid; margin-top: 10pt; }
+        table.sign { width: 100%; border-collapse: collapse; }
+        table.sign td { width: 50%; text-align: center; vertical-align: top; padding: 0 6pt; }
+        .sign-space { height: 40pt; }
+
+        .foot { margin-top: 8pt; text-align: center; font-size: 9pt; color: #777777; }
+    </style>
+</head>
+<body>
+
+<!-- ĐẦU HÓA ĐƠN -->
+<table class="head">
+    <tr>
+        <td class="head-left">
+            <p class="house" th:text="${v.buildingName}">Nhà trọ An Phát</p>
+            <p class="meta-line" th:text="${v.buildingAddress}">Số 1, đường ABC, phường XYZ, Hà Nội</p>
+            <p class="meta-line">Chủ trọ: <span class="bold" th:text="${v.landlordName}">Nguyễn Văn A</span></p>
+            <p class="meta-line">Điện thoại: <span th:text="${v.landlordPhone}">0369 958 572</span></p>
+        </td>
+        <td class="head-right">
+            <p class="meta-line">Số hóa đơn: <span class="bold" th:text="${v.invoiceCode}">HD-202610-P101</span></p>
+            <p class="meta-line">Ngày lập: <span th:text="${v.issueDate}">01/11/2026</span></p>
+            <p class="meta-line">Hạn thanh toán: <span class="bold" th:text="${v.dueDate}">10/11/2026</span></p>
+        </td>
+    </tr>
+</table>
+
+<div class="rule"></div>
+
+<h1>HÓA ĐƠN TIỀN PHÒNG</h1>
+<p class="period">Kỳ thanh toán: <span class="bold" th:text="${v.periodLabel}">Tháng 10/2026</span></p>
+
+<div class="status-wrap">
+    <span th:class="'status status-' + ${v.statusClass}" th:text="${v.statusLabel}">THANH TOÁN MỘT PHẦN</span>
+</div>
+
+<!-- THÔNG TIN KHÁCH THUÊ -->
+<table class="info">
+    <tr>
+        <td class="info-label">Khách thuê:</td>
+        <td class="info-value" th:text="${v.tenantName}">Lê Văn B</td>
+        <td class="info-label">Phòng:</td>
+        <td class="info-value" th:text="${v.roomNumber}">P101</td>
+    </tr>
+    <tr>
+        <td class="info-label">Điện thoại:</td>
+        <td class="info-value" th:text="${v.tenantPhone}">0900 000 001</td>
+        <td class="info-label">Hợp đồng:</td>
+        <td class="info-value" th:text="${v.contractCode}">HDTP-2026-0001</td>
+    </tr>
+</table>
+
+<!-- CHI TIẾT CÁC KHOẢN -->
+<h2>Chi tiết các khoản phải thanh toán</h2>
+<table class="grid">
+    <thead>
+    <tr>
+        <th class="col-index">STT</th>
+        <th>Khoản mục</th>
+        <th style="width: 62pt;">Số lượng</th>
+        <th style="width: 82pt;">Đơn giá (đ)</th>
+        <th style="width: 92pt;">Thành tiền (đ)</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="item : ${v.items}">
+        <td class="col-index" th:text="${item.index}">1</td>
+        <td>
+            <span th:text="${item.name}">Tiền phòng</span>
+            <span class="detail" th:if="${item.detail != null}" th:text="${item.detail}">Chi tiết</span>
+        </td>
+        <td class="num" th:text="${item.quantity}">1</td>
+        <td class="num" th:text="${item.unitPrice}">3.200.000</td>
+        <td class="num" th:text="${item.amount}">3.200.000</td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- TỔNG TIỀN -->
+<table class="total">
+    <tr>
+        <td>Tổng cộng</td>
+        <td class="num bold" th:text="${v.total} + ' đ'">3.717.500 đ</td>
+    </tr>
+    <tr class="line">
+        <td>Đã thanh toán</td>
+        <td class="num" th:text="${v.paid} + ' đ'">2.000.000 đ</td>
+    </tr>
+    <tr class="due">
+        <td>Còn phải thanh toán</td>
+        <td class="num" th:text="${v.remaining} + ' đ'">1.717.500 đ</td>
+    </tr>
+</table>
+<p class="words italic">Bằng chữ (tổng cộng): <span th:text="${v.totalWords}">Ba triệu bảy trăm mười bảy nghìn năm trăm đồng</span></p>
+
+<!-- LỊCH SỬ THANH TOÁN -->
+<div th:if="${v.hasPayments}">
+    <h2>Các lần đã thanh toán</h2>
+    <table class="grid">
+        <thead>
+        <tr>
+            <th style="width: 80pt;">Ngày</th>
+            <th>Hình thức</th>
+            <th>Mã giao dịch</th>
+            <th style="width: 92pt;">Số tiền (đ)</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="p : ${v.payments}">
+            <td class="center" th:text="${p.date}">05/11/2026</td>
+            <td th:text="${p.method}">Chuyển khoản</td>
+            <td th:text="${p.code}">FT26309000123</td>
+            <td class="num" th:text="${p.amount}">2.000.000</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- HƯỚNG DẪN THANH TOÁN -->
+<div class="pay-box" th:if="${v.hasBank}">
+    <p class="pay-title">Thông tin chuyển khoản</p>
+    <p>Ngân hàng: <span class="bold" th:text="${v.bankName}">Vietcombank</span>
+        &#160;|&#160; Số tài khoản: <span class="bold" th:text="${v.bankAccountNumber}">0123456789</span></p>
+    <p>Chủ tài khoản: <span class="bold" th:text="${v.bankAccountHolder}">NGUYEN VAN A</span>
+        &#160;|&#160; Nội dung: <span class="bold" th:text="${v.transferContent}">HD-202610-P101</span></p>
+</div>
+
+<!-- GHI CHÚ -->
+<p class="note" th:if="${v.note != null}"><span class="bold">Ghi chú:</span> <span th:text="${v.note}">Ghi chú của hóa đơn</span></p>
+
+<!-- CHỮ KÝ -->
+<div class="sign-block">
+    <table class="sign">
+        <tr>
+            <td>
+                <p class="bold">NGƯỜI THANH TOÁN</p>
+                <p class="italic">(Khách thuê ký, ghi rõ họ tên)</p>
+                <div class="sign-space"></div>
+                <p class="bold" th:text="${v.tenantName}">Lê Văn B</p>
+            </td>
+            <td>
+                <p class="bold">NGƯỜI LẬP HÓA ĐƠN</p>
+                <p class="italic">(Chủ trọ ký, ghi rõ họ tên)</p>
+                <div class="sign-space"></div>
+                <p class="bold" th:text="${v.landlordName}">Nguyễn Văn A</p>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<p class="foot">Hóa đơn được lập từ hệ thống quản lý nhà trọ TROSMART</p>
+
+</body>
+</html>

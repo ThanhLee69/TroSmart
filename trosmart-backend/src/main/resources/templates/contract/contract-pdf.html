@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head>
+    <meta charset="UTF-8"/>
+    <title th:text="'Hợp đồng ' + ${c.contractCode}">Hợp đồng thuê phòng trọ</title>
+    <style type="text/css">
+        /* Chỉ dùng CSS 2.1 (bảng, khối, float) vì OpenHTMLtoPDF không hỗ trợ flex/grid */
+        @page {
+            size: A4;
+            margin: 20mm 18mm 22mm 25mm;
+
+            @bottom-center {
+                content: "Trang " counter(page) " / " counter(pages);
+                font-family: "Liberation Serif", serif;
+                font-size: 10pt;
+                color: #444444;
+            }
+        }
+
+        body {
+            margin: 0;
+            font-family: "Liberation Serif", "Times New Roman", serif;
+            font-size: 12pt;
+            line-height: 1.4;
+            color: #000000;
+        }
+
+        p { margin: 0 0 4pt 0; text-align: justify; }
+
+        .center { text-align: center; }
+        .right { text-align: right; }
+        .bold { font-weight: bold; }
+        .italic { font-style: italic; }
+
+        .nation { text-align: center; font-weight: bold; font-size: 12pt; margin: 0; }
+        .motto { text-align: center; font-weight: bold; font-size: 12pt; margin: 0; }
+        .motto-line { text-align: center; margin: 0 0 14pt 0; letter-spacing: 2pt; }
+
+        .banner {
+            margin: 0 0 12pt 0;
+            padding: 5pt 8pt;
+            border: 1.5pt solid #000000;
+            text-align: center;
+            font-weight: bold;
+            font-size: 12pt;
+        }
+
+        h1 {
+            margin: 6pt 0 2pt 0;
+            text-align: center;
+            font-size: 15pt;
+            font-weight: bold;
+        }
+
+        .code { text-align: center; margin: 0 0 12pt 0; }
+
+        h2 {
+            margin: 9pt 0 3pt 0;
+            font-size: 12pt;
+            font-weight: bold;
+            page-break-after: avoid;
+        }
+
+        .party-title { margin: 10pt 0 3pt 0; font-weight: bold; }
+        .party p { margin-bottom: 2pt; text-align: left; }
+
+        table.grid {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 4pt 0 8pt 0;
+            page-break-inside: auto;
+        }
+
+        table.grid th, table.grid td {
+            border: 0.75pt solid #000000;
+            padding: 2pt 5pt;
+            font-size: 11.5pt;
+            line-height: 1.3;
+            vertical-align: top;
+        }
+
+        table.grid th { font-weight: bold; text-align: center; background-color: #eeeeee; }
+        table.grid tr { page-break-inside: avoid; }
+        .num { text-align: right; white-space: nowrap; }
+        .col-index { width: 28pt; text-align: center; }
+
+        .notes { white-space: pre-wrap; text-align: left; }
+
+        /* Khối chữ ký không bị cắt đôi giữa hai trang */
+        .sign-block { page-break-inside: avoid; margin-top: 12pt; }
+        table.sign { width: 100%; border-collapse: collapse; }
+        table.sign td { width: 50%; text-align: center; vertical-align: top; padding: 0 6pt; }
+        .sign-space { height: 70pt; }
+    </style>
+</head>
+<body>
+
+<!-- QUỐC HIỆU, TIÊU NGỮ -->
+<p class="nation">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</p>
+<p class="motto">Độc lập - Tự do - Hạnh phúc</p>
+<p class="motto-line">-----------------</p>
+
+<div class="banner" th:if="${c.banner != null}" th:text="${c.banner}">BẢN NHÁP - CHƯA CÓ HIỆU LỰC</div>
+
+<h1>HỢP ĐỒNG THUÊ PHÒNG TRỌ</h1>
+<p class="code">Số: <span class="bold" th:text="${c.contractCode}">HD202611070001</span></p>
+
+<p class="italic">Căn cứ Bộ luật Dân sự năm 2015;</p>
+<p class="italic">Căn cứ nhu cầu và khả năng của hai bên.</p>
+
+<p>
+    Hôm nay, ngày <span th:text="${c.signDay}">07</span>
+    tháng <span th:text="${c.signMonth}">11</span>
+    năm <span th:text="${c.signYear}">2026</span>,
+    tại <span th:text="${c.signPlace}">địa chỉ</span>, chúng tôi gồm:
+</p>
+
+<!-- BÊN A -->
+<div class="party">
+    <p class="party-title">BÊN CHO THUÊ (sau đây gọi là Bên A):</p>
+    <p>Ông/Bà: <span class="bold" th:text="${c.landlord.fullName}">Nguyễn Văn A</span>;
+        sinh ngày: <span th:text="${c.landlord.birthDate}">01/01/1980</span></p>
+    <p>Số CCCD: <span th:text="${c.landlord.identityNumber}">001080000000</span>;
+        cấp ngày: <span th:text="${c.landlord.identityIssuedDate}">01/01/2021</span>;
+        nơi cấp: <span th:text="${c.landlord.identityIssuedPlace}">Cục Cảnh sát QLHC về TTXH</span></p>
+    <p>Địa chỉ thường trú: <span th:text="${c.landlord.address}">địa chỉ</span></p>
+    <p>Số điện thoại: <span th:text="${c.landlord.phone}">0369 958 572</span></p>
+</div>
+
+<!-- BÊN B -->
+<div class="party">
+    <p class="party-title">BÊN THUÊ (sau đây gọi là Bên B):</p>
+    <p>Ông/Bà: <span class="bold" th:text="${c.tenant.fullName}">Trần Văn B</span>;
+        sinh ngày: <span th:text="${c.tenant.birthDate}">02/02/2000</span></p>
+    <p>Số CCCD: <span th:text="${c.tenant.identityNumber}">001200000000</span>;
+        cấp ngày: <span th:text="${c.tenant.identityIssuedDate}">01/01/2022</span>;
+        nơi cấp: <span th:text="${c.tenant.identityIssuedPlace}">Cục Cảnh sát QLHC về TTXH</span></p>
+    <p>Địa chỉ thường trú: <span th:text="${c.tenant.address}">địa chỉ</span></p>
+    <p>Số điện thoại: <span th:text="${c.tenant.phone}">0900 000 000</span></p>
+</div>
+
+<p style="margin-top: 8pt;">Sau khi bàn bạc, hai bên thống nhất ký hợp đồng thuê phòng trọ với các điều khoản sau:</p>
+
+<!-- ĐIỀU 1 -->
+<h2>Điều 1. Đối tượng của hợp đồng</h2>
+<p>
+    Bên A đồng ý cho Bên B thuê phòng số <span class="bold" th:text="${c.roomNumber}">101</span>,
+    tầng <span th:text="${c.floor}">1</span>,
+    diện tích <span th:text="${c.area}">20</span> m²,
+    tại <span th:text="${c.buildingName}">Nhà trọ A</span>,
+    địa chỉ <span th:text="${c.buildingAddress}">địa chỉ tòa nhà</span>.
+    Số người ở tối đa của phòng là <span th:text="${c.maxOccupancy}">2</span> người.
+</p>
+
+<!-- ĐIỀU 2 -->
+<h2>Điều 2. Thời hạn thuê</h2>
+<p>
+    Thời hạn thuê là <span class="bold" th:text="${c.duration}">12 tháng</span>,
+    từ ngày <span class="bold" th:text="${c.startDate}">01/01/2026</span>
+    đến hết ngày <span class="bold" th:text="${c.endDate}">31/12/2026</span>.
+    Khi hết hạn, nếu hai bên muốn tiếp tục thì thỏa thuận gia hạn bằng văn bản hoặc trên hệ thống quản lý của Bên A.
+</p>
+
+<!-- ĐIỀU 3 -->
+<h2>Điều 3. Giá thuê, tiền đặt cọc và thanh toán</h2>
+<p>
+    3.1. Giá thuê phòng là <span class="bold" th:text="${c.rentPrice}">3.500.000</span> đồng/tháng
+    (<span class="italic" th:text="${c.rentPriceWords}">Ba triệu năm trăm nghìn đồng</span>).
+</p>
+<p>
+    3.2. Tiền đặt cọc là <span class="bold" th:text="${c.deposit}">3.500.000</span> đồng
+    (<span class="italic" th:text="${c.depositWords}">Ba triệu năm trăm nghìn đồng</span>).
+    Khoản tiền này được Bên A giữ trong suốt thời hạn thuê và hoàn lại cho Bên B khi chấm dứt hợp đồng,
+    sau khi trừ các khoản Bên B còn nợ (tiền thuê, điện, nước, dịch vụ) và chi phí sửa chữa hư hỏng do Bên B gây ra (nếu có).
+</p>
+<p>
+    3.3. Tiền thuê phòng và các khoản phí được Bên A tổng hợp thành hóa đơn theo từng kỳ (tháng).
+    Bên B thanh toán đủ và đúng hạn ghi trên hóa đơn bằng tiền mặt hoặc chuyển khoản.
+</p>
+
+<!-- ĐIỀU 4 -->
+<h2>Điều 4. Điện, nước và các dịch vụ</h2>
+<p>
+    4.1. Điện, nước được tính theo chỉ số công tơ do Bên A ghi hằng kỳ và đơn giá áp dụng.
+    Các dịch vụ khác tính theo đơn giá dưới đây:
+</p>
+
+<table class="grid" th:if="${!c.services.isEmpty()}">
+    <thead>
+    <tr>
+        <th class="col-index">STT</th>
+        <th>Tên dịch vụ</th>
+        <th>Đơn vị tính</th>
+        <th>Đơn giá (đồng)</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="s : ${c.services}">
+        <td class="col-index" th:text="${s.index}">1</td>
+        <td th:text="${s.name}">Điện</td>
+        <td th:text="${s.unit}">kWh</td>
+        <td class="num" th:text="${s.unitPrice}">3.500</td>
+    </tr>
+    </tbody>
+</table>
+<p th:if="${c.services.isEmpty()}" class="italic">(Hợp đồng này không có dịch vụ đi kèm.)</p>
+
+<p>
+    4.2. Đơn giá dịch vụ được áp dụng theo hợp đồng này. Việc điều chỉnh đơn giá (nếu có)
+    phải được hai bên đồng ý trước.
+</p>
+
+<!-- ĐIỀU 5 -->
+<h2>Điều 5. Người ở cùng</h2>
+<table class="grid" th:if="${!c.coTenants.isEmpty()}">
+    <thead>
+    <tr>
+        <th class="col-index">STT</th>
+        <th>Họ và tên</th>
+        <th>Số CCCD</th>
+        <th>Số điện thoại</th>
+        <th>Ngày vào ở</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="t : ${c.coTenants}">
+        <td class="col-index" th:text="${t.index}">1</td>
+        <td th:text="${t.fullName}">Nguyễn Thị C</td>
+        <td th:text="${t.identityNumber}">001200000001</td>
+        <td th:text="${t.phone}">0900 000 001</td>
+        <td th:text="${t.moveInDate}">01/01/2026</td>
+    </tr>
+    </tbody>
+</table>
+<p th:if="${c.coTenants.isEmpty()}">Bên B thuê và ở một mình, không có người ở cùng.</p>
+<p>
+    Bên B có trách nhiệm đăng ký tạm trú cho người ở cùng theo quy định và chịu trách nhiệm về những người này.
+    Việc thêm hoặc bớt người ở cùng phải thông báo cho Bên A và không vượt quá số người ở tối đa của phòng.
+</p>
+
+<!-- ĐIỀU 6 -->
+<h2>Điều 6. Quyền và nghĩa vụ của Bên A</h2>
+<p>6.1. Giao phòng và trang thiết bị (nếu có) cho Bên B đúng thời hạn, đảm bảo phòng ở trong tình trạng sử dụng được.</p>
+<p>6.2. Đảm bảo cho Bên B sử dụng phòng ổn định trong thời hạn hợp đồng.</p>
+<p>6.3. Hướng dẫn, nhắc nhở Bên B thực hiện nội quy nhà trọ và các quy định về an ninh, phòng cháy chữa cháy.</p>
+<p>6.4. Thu tiền thuê, tiền điện, nước và các khoản phí đúng thỏa thuận; cung cấp hóa đơn rõ ràng cho Bên B.</p>
+<p>6.5. Được quyền vào phòng để kiểm tra, sửa chữa khi cần thiết sau khi báo trước cho Bên B, trừ trường hợp khẩn cấp.</p>
+
+<!-- ĐIỀU 7 -->
+<h2>Điều 7. Quyền và nghĩa vụ của Bên B</h2>
+<p>7.1. Sử dụng phòng đúng mục đích để ở, không chuyển nhượng hoặc cho người khác thuê lại khi chưa được Bên A đồng ý.</p>
+<p>7.2. Thanh toán đầy đủ, đúng hạn tiền thuê và các khoản phí theo hợp đồng.</p>
+<p>7.3. Giữ gìn tài sản, trang thiết bị trong phòng; làm hư hỏng, mất mát thì phải sửa chữa hoặc bồi thường.</p>
+<p>7.4. Chấp hành nội quy nhà trọ, giữ gìn vệ sinh chung, an ninh trật tự; không tàng trữ chất cấm, chất nổ, chất cháy.</p>
+<p>7.5. Báo ngay cho Bên A khi phòng có sự cố hoặc cần sửa chữa.</p>
+<p>7.6. Trả lại phòng đúng thời hạn khi hết hợp đồng hoặc khi chấm dứt hợp đồng.</p>
+
+<!-- ĐIỀU 8 -->
+<h2>Điều 8. Chấm dứt hợp đồng</h2>
+<p>8.1. Hợp đồng chấm dứt khi hết thời hạn thuê mà hai bên không gia hạn, hoặc khi hai bên thỏa thuận chấm dứt trước hạn.</p>
+<p>
+    8.2. Mỗi bên có quyền đơn phương chấm dứt hợp đồng khi bên kia vi phạm nghiêm trọng nghĩa vụ,
+    nhưng phải thông báo trước cho bên còn lại một khoảng thời gian hợp lý để thu xếp.
+</p>
+<p>
+    8.3. Khi chấm dứt hợp đồng, hai bên cùng kiểm tra phòng, chốt chỉ số điện nước, thanh toán các khoản còn nợ
+    và Bên A hoàn lại tiền đặt cọc theo khoản 3.2.
+</p>
+
+<!-- ĐIỀU 9 -->
+<h2>Điều 9. Cam kết chung</h2>
+<p>9.1. Hai bên cam kết thực hiện đúng các điều khoản đã ghi trong hợp đồng.</p>
+<p>9.2. Khi có tranh chấp, hai bên ưu tiên thương lượng; nếu không thỏa thuận được thì đưa ra cơ quan có thẩm quyền giải quyết theo quy định của pháp luật.</p>
+<p>9.3. Mọi sửa đổi, bổ sung hợp đồng phải được hai bên đồng ý.</p>
+<p>9.4. Hợp đồng được lập thành 02 bản có giá trị pháp lý như nhau, mỗi bên giữ 01 bản.</p>
+
+<div th:if="${c.notes != null}">
+    <h2>Ghi chú</h2>
+    <p class="notes" th:text="${c.notes}">Ghi chú của hợp đồng</p>
+</div>
+
+<!-- CHỮ KÝ -->
+<div class="sign-block">
+    <table class="sign">
+        <tr>
+            <td>
+                <p class="center bold">BÊN A</p>
+                <p class="center italic">(Bên cho thuê)</p>
+                <p class="center italic">(Ký, ghi rõ họ tên)</p>
+                <div class="sign-space"></div>
+                <p class="center bold" th:text="${c.landlord.fullName}">Nguyễn Văn A</p>
+            </td>
+            <td>
+                <p class="center bold">BÊN B</p>
+                <p class="center italic">(Bên thuê)</p>
+                <p class="center italic">(Ký, ghi rõ họ tên)</p>
+                <div class="sign-space"></div>
+                <p class="center bold" th:text="${c.tenant.fullName}">Trần Văn B</p>
+            </td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,126 @@
+/* Trạng thái hóa đơn: dấu chấm + nền màu nhạt (cùng bảng màu với trang chi tiết) */
+.ivl-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 26px;
+  padding: 0 11px 0 10px;
+  border-radius: 999px;
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  background: var(--bg);
+  color: var(--ink);
+}
+
+.ivl-status__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--dot);
+  flex: none;
+}
+
+.ivl-status--UNPAID {
+  --bg: #eef0fd;
+  --ink: #3b4bcb;
+  --dot: #536ee7;
+}
+
+.ivl-status--PARTIALLY_PAID {
+  --bg: #fff4e0;
+  --ink: #b85c00;
+  --dot: #fa8c16;
+}
+
+.ivl-status--PAID {
+  --bg: #e6f6ee;
+  --ink: #137a4b;
+  --dot: #1fa566;
+}
+
+.ivl-status--OVERDUE {
+  --bg: #fff1f0;
+  --ink: #cf1322;
+  --dot: #ef4444;
+}
+
+.ivl-status--CANCELLED {
+  --bg: #f1f3fb;
+  --ink: #5b6385;
+  --dot: #9aa1bd;
+}
+
+/* Mã hóa đơn: chữ đen, bấm được */
+.ivl-code {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-weight: 600;
+  color: #151b3b;
+  text-align: left;
+  cursor: pointer;
+}
+
+.ivl-code:hover {
+  color: #3b4bcb;
+  text-decoration: underline;
+}
+
+.ivl-code:focus-visible {
+  outline: 2px solid #536ee7;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Kỳ */
+.ivl-period {
+  font-weight: 600;
+  color: #151b3b;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Số tiền */
+.ivl-money {
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.ivl-money--total {
+  color: #151b3b;
+}
+
+.ivl-money--ok {
+  color: #137a4b;
+}
+
+.ivl-money--warn {
+  color: #d46b08;
+}
+
+.ivl-money--danger {
+  color: #cf1322;
+}
+
+.ivl-money--zero {
+  color: #9aa1bd;
+  font-weight: 500;
+}
+
+/* Nút xem chi tiết */
+.ivl-action.ant-btn {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border-radius: 8px;
+  color: #5b6385;
+}
+
+.ivl-action.ant-btn:hover {
+  background: #eef0fd;
+  color: #3b4bcb;
+}

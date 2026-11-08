@@ -1,0 +1,704 @@
+/* =========================================================
+   Trang Lập hóa đơn (InvoiceForm)
+   Tiền tố inv- để không đụng CSS của trang khác
+   ========================================================= */
+
+.inv-form {
+  --inv-primary: #536ee7;
+  --inv-primary-dark: #3b4bcb;
+  --inv-text: #151b3b;
+  --inv-muted: #5b6385;
+  --inv-hint: #7a82a6;
+  --inv-border: #e3e6f2;
+  --inv-line: #eef0f8;
+  --inv-soft: #f6f7ff;
+  --inv-danger: #cf1322;
+  --inv-success: #137a4b;
+
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  min-width: 0;
+  color: var(--inv-text);
+}
+
+.inv-form * {
+  box-sizing: border-box;
+}
+
+/* ---------- Tiêu đề trang ---------- */
+.inv-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 24px;
+}
+
+.inv-head__left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+
+.inv-back {
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--inv-border);
+  border-radius: 12px;
+  background: #fff;
+  color: #3a4268;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.inv-back:hover {
+  background: #f4f5fd;
+}
+
+.inv-head__text {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.inv-title {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--inv-text);
+}
+
+.inv-sub {
+  font-size: 14px;
+  color: var(--inv-muted);
+}
+
+.inv-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* ---------- Thẻ ---------- */
+.inv-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+  padding: 24px;
+  background: #fff;
+  border: 1px solid var(--inv-border);
+  border-radius: 18px;
+}
+
+.inv-card__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 16px;
+}
+
+.inv-card__title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--inv-text);
+}
+
+.inv-card__note {
+  font-size: 13px;
+  color: var(--inv-muted);
+}
+
+/* ---------- Ô nhập ---------- */
+.inv-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.inv-field > label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--inv-text);
+}
+
+.inv-field > label i {
+  margin-left: 2px;
+  color: var(--inv-danger);
+  font-style: normal;
+}
+
+.inv-field .ant-select,
+.inv-field .ant-picker,
+.inv-field .ant-input {
+  width: 100%;
+}
+
+.inv-hint {
+  font-size: 12px;
+  color: var(--inv-hint);
+}
+
+.inv-error {
+  font-size: 13px;
+  color: var(--inv-danger);
+}
+
+/* ---------- Bước 1: chọn hợp đồng và kỳ ---------- */
+.inv-pick {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  align-items: end;
+}
+
+.inv-pick__contract {
+  grid-column: span 2;
+}
+
+.inv-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: var(--inv-soft);
+}
+
+.inv-info__item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.inv-info__label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--inv-muted);
+}
+
+.inv-info__value {
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+/* ---------- Hộp thông báo ---------- */
+.inv-alert {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 16px;
+  padding: 14px 18px;
+  border-radius: 14px;
+  border: 1px solid;
+}
+
+.inv-alert__text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.inv-alert__text b {
+  font-size: 15px;
+}
+
+.inv-alert__text span {
+  font-size: 14px;
+}
+
+.inv-alert--warn {
+  background: #fff7e6;
+  border-color: #ffd591;
+  color: #874d00;
+}
+
+.inv-alert--info {
+  background: #e6f4ff;
+  border-color: #91caff;
+  color: #0a3f8c;
+}
+
+/* ---------- Bước 2: bố cục 2 cột ---------- */
+.inv-body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.inv-main {
+  flex: 2 1 640px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.inv-side {
+  flex: 1 1 340px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ---------- Bảng các dòng hóa đơn ---------- */
+.inv-lines {
+  overflow-x: auto;
+  border: 1px solid var(--inv-border);
+  border-radius: 14px;
+}
+
+.inv-lines__inner {
+  min-width: 740px;
+}
+
+.inv-line {
+  display: grid;
+  grid-template-columns: 110px minmax(180px, 1.6fr) 90px 130px 140px 44px;
+  grid-template-areas: "kind name qty price amount action";
+  gap: 12px;
+  align-items: center;
+  padding: 18px 16px;
+  border-bottom: 1px solid var(--inv-line);
+  font-size: 14px;
+}
+
+.inv-line:last-child {
+  border-bottom: 0;
+}
+
+.inv-line--head {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--inv-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  background: #f8f9fd;
+}
+
+.inv-line--manual {
+  background: #fffdf8;
+}
+
+.inv-line__kind {
+  grid-area: kind;
+  justify-self: start;
+}
+
+.inv-line__name {
+  grid-area: name;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.inv-line__qty {
+  grid-area: qty;
+}
+
+.inv-line__price {
+  grid-area: price;
+}
+
+.inv-line__amount {
+  grid-area: amount;
+  font-weight: 700;
+}
+
+.inv-line__action {
+  grid-area: action;
+  display: flex;
+  justify-content: center;
+  color: var(--inv-hint);
+}
+
+.inv-line .inv-num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.inv-line .ant-input-number {
+  width: 100%;
+}
+
+.inv-line .ant-input-number-input {
+  text-align: right;
+}
+
+.inv-amount--minus {
+  color: var(--inv-success);
+}
+
+/* Nhãn loại dòng */
+.inv-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 0 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.inv-chip--ROOM_FEE {
+  background: #eef0fd;
+  color: #3b4bcb;
+}
+
+.inv-chip--ELECTRICITY {
+  background: #fff1c9;
+  color: #8a5a00;
+}
+
+.inv-chip--WATER {
+  background: #d4edf5;
+  color: #0f5e6c;
+}
+
+.inv-chip--SERVICE {
+  background: #e6f6ee;
+  color: #137a4b;
+}
+
+.inv-chip--SURCHARGE {
+  background: #fff1e6;
+  color: #b45309;
+}
+
+.inv-chip--DISCOUNT {
+  background: #f9ecff;
+  color: #8e24aa;
+}
+
+.inv-add {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* ---------- Tổng kết ---------- */
+.inv-total-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--inv-line);
+  font-size: 14px;
+}
+
+.inv-total-row span:first-child {
+  color: var(--inv-muted);
+}
+
+.inv-total-row b {
+  font-variant-numeric: tabular-nums;
+}
+
+.inv-total-box {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 10px;
+  padding: 16px 20px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #eef1ff, #e6f6f8);
+}
+
+.inv-total-box span {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--inv-muted);
+}
+
+.inv-total-box strong {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--inv-primary-dark);
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+
+/* =========================================================
+   Ô nhập và nút bấm: thon, bo góc vừa, cùng tông tím xanh
+   ========================================================= */
+
+/* Ô nhập một dòng: cao 38px */
+.inv-form input.ant-input,
+.inv-form .ant-input-number,
+.inv-form .ant-picker,
+.inv-form .ant-select-single .ant-select-selector {
+  height: 38px;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+.inv-form .ant-select-single.ant-select {
+  height: 38px;
+}
+
+.inv-form .ant-input-number-input {
+  height: 36px;
+}
+
+.inv-form .ant-picker {
+  padding: 0 12px;
+}
+
+.inv-form .ant-select-single .ant-select-selector {
+  padding: 0 12px;
+}
+
+.inv-form .ant-select-single .ant-select-selector .ant-select-selection-item,
+.inv-form
+  .ant-select-single
+  .ant-select-selector
+  .ant-select-selection-placeholder {
+  line-height: 36px;
+}
+
+.inv-form .ant-select-single .ant-select-selection-search {
+  inset-inline-start: 12px;
+  inset-inline-end: 12px;
+}
+
+.inv-form
+  .ant-select-single
+  .ant-select-selector
+  .ant-select-selection-search-input {
+  height: 36px;
+}
+
+.inv-form textarea.ant-input {
+  border-radius: 10px;
+  padding: 8px 12px;
+}
+
+/* Viền nhạt hơn mặc định (không đè trạng thái lỗi) */
+.inv-form input.ant-input:not(.ant-input-status-error),
+.inv-form textarea.ant-input:not(.ant-input-status-error),
+.inv-form .ant-input-number:not(.ant-input-number-status-error),
+.inv-form .ant-picker:not(.ant-picker-status-error),
+.inv-form
+  .ant-select:not(.ant-select-status-error):not(.ant-select-disabled)
+  .ant-select-selector {
+  border-color: #d5daf0;
+}
+
+.inv-form input.ant-input:not(.ant-input-status-error):hover,
+.inv-form textarea.ant-input:not(.ant-input-status-error):hover,
+.inv-form .ant-input-number:not(.ant-input-number-status-error):hover,
+.inv-form .ant-picker:not(.ant-picker-status-error):hover,
+.inv-form
+  .ant-select:not(.ant-select-status-error):not(.ant-select-disabled):hover
+  .ant-select-selector {
+  border-color: #8f9cf0;
+}
+
+.inv-form input.ant-input:not(.ant-input-status-error):focus,
+.inv-form textarea.ant-input:not(.ant-input-status-error):focus,
+.inv-form .ant-input-number-focused:not(.ant-input-number-status-error),
+.inv-form .ant-picker-focused:not(.ant-picker-status-error),
+.inv-form
+  .ant-select-focused:not(.ant-select-status-error)
+  .ant-select-selector {
+  border-color: #536ee7 !important;
+  box-shadow: 0 0 0 3px rgba(83, 110, 231, 0.14) !important;
+}
+
+.inv-form .ant-input-number-input {
+  padding: 0 12px;
+}
+
+/* Nút bấm: thon 38px */
+.inv-actions .ant-btn,
+.inv-pick .ant-btn,
+.inv-add .ant-btn,
+.inv-alert .ant-btn {
+  height: 38px;
+  padding: 0 18px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: none;
+  transition:
+    background-color 0.15s,
+    border-color 0.15s,
+    color 0.15s,
+    filter 0.15s;
+}
+
+.inv-actions .ant-btn.ant-btn-default,
+.inv-pick .ant-btn.ant-btn-default,
+.inv-add .ant-btn.ant-btn-default,
+.inv-alert .ant-btn.ant-btn-default {
+  border-color: #d5daf0;
+  background: #fff;
+  color: #3a4268;
+}
+
+.inv-actions .ant-btn.ant-btn-default:not(:disabled):hover,
+.inv-pick .ant-btn.ant-btn-default:not(:disabled):hover,
+.inv-add .ant-btn.ant-btn-default:not(:disabled):hover,
+.inv-alert .ant-btn.ant-btn-default:not(:disabled):hover {
+  border-color: #536ee7;
+  background: #f6f7fd;
+  color: #3b4bcb;
+}
+
+/* Nút chính: gradient tím xanh thay cho màu xanh mặc định */
+.inv-actions .ant-btn.ant-btn-primary,
+.inv-pick .ant-btn.ant-btn-primary {
+  border-color: transparent;
+  background-color: #4a5be0;
+  background-image: linear-gradient(135deg, #5b76ee, #4a5be0);
+  color: #fff;
+  box-shadow: 0 6px 14px -8px rgba(74, 91, 224, 0.9);
+}
+
+.inv-actions .ant-btn.ant-btn-primary:not(:disabled):hover,
+.inv-pick .ant-btn.ant-btn-primary:not(:disabled):hover {
+  background-color: #4a5be0;
+  background-image: linear-gradient(135deg, #5b76ee, #4a5be0);
+  color: #fff;
+  filter: brightness(1.06);
+}
+
+.inv-actions .ant-btn.ant-btn-primary:disabled,
+.inv-pick .ant-btn.ant-btn-primary:disabled {
+  background-image: none;
+  background-color: #e6e9f5;
+  color: #a3a9c4;
+  box-shadow: none;
+}
+
+/* Nút icon xóa dòng */
+.inv-line__action .ant-btn {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border-radius: 8px;
+}
+
+/* =========================================================
+   Responsive
+   ========================================================= */
+
+/* Máy tính bảng */
+@media (max-width: 992px) {
+  .inv-main,
+  .inv-side {
+    flex: 1 1 100%;
+  }
+}
+
+/* Điện thoại và máy tính bảng nhỏ: bảng dòng chuyển thành từng thẻ */
+@media (max-width: 760px) {
+  .inv-card {
+    padding: 18px;
+  }
+
+  .inv-lines {
+    overflow: visible;
+    border: 0;
+  }
+
+  .inv-lines__inner {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .inv-line--head {
+    display: none;
+  }
+
+  .inv-line {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "kind action"
+      "name name"
+      "qty price"
+      "amount amount";
+    gap: 10px 12px;
+    padding: 14px;
+    border: 1px solid var(--inv-border);
+    border-radius: 14px;
+    background: #fff;
+  }
+
+  .inv-line--manual {
+    background: #fffdf8;
+  }
+
+  .inv-line__action {
+    justify-content: flex-end;
+  }
+
+  .inv-line [data-label]::before {
+    content: attr(data-label);
+    display: block;
+    margin-bottom: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--inv-hint);
+  }
+
+  .inv-line .inv-num {
+    text-align: left;
+  }
+
+  .inv-line .ant-input-number-input {
+    text-align: left;
+  }
+}
+
+/* Điện thoại */
+@media (max-width: 560px) {
+  .inv-title {
+    font-size: 24px;
+  }
+
+  .inv-pick__contract {
+    grid-column: span 1;
+  }
+
+  .inv-actions {
+    width: 100%;
+  }
+
+  .inv-actions .ant-btn {
+    flex: 1 1 0;
+  }
+
+  .inv-add .ant-btn {
+    flex: 1 1 100%;
+  }
+
+  .inv-alert .ant-btn {
+    width: 100%;
+  }
+
+  .inv-total-box strong {
+    font-size: 24px;
+  }
+}

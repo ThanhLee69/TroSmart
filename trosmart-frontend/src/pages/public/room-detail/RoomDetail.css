@@ -1,0 +1,1010 @@
+/* =========================
+   ROOM DETAIL PAGE
+========================= */
+
+.room-detail-page {
+  width: 100%;
+  padding: 24px 0 32px;
+  background:
+    radial-gradient(
+      900px 340px at 85% -80px,
+      #e6eaff 0%,
+      rgba(230, 234, 255, 0) 70%
+    ),
+    #f6f7fc;
+  box-sizing: border-box;
+}
+
+.room-detail-container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+  box-sizing: border-box;
+}
+
+/* =========================
+   BREADCRUMB
+========================= */
+
+.room-detail-breadcrumb {
+  margin-bottom: 22px;
+  font-size: 13px;
+}
+
+.room-detail-breadcrumb__link {
+  color: #64748b;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.room-detail-breadcrumb__link:hover {
+  color: #536ee7;
+}
+
+.room-detail-breadcrumb__current {
+  color: #536ee7 !important;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* =========================
+   HEADING
+========================= */
+
+.room-detail-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.room-detail-heading__info {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Tên phòng + nhãn loại phòng cùng một hàng */
+.room-detail-heading__top {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  margin-bottom: 4px;
+}
+
+.room-detail-heading__type {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: #eef0fd;
+  color: #3b4bcb;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.room-detail-heading__type::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #4a5be0;
+}
+
+.room-detail-heading__title {
+  margin: 0 !important;
+  color: #101a35 !important;
+  font-size: 28px !important;
+  font-weight: 700 !important;
+  line-height: 1.4 !important;
+  overflow-wrap: anywhere;
+}
+
+/* Địa chỉ */
+
+.room-detail-heading__address {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 7px;
+  min-width: 0;
+}
+
+.room-detail-heading__address-icon {
+  color: #536ee7;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.room-detail-heading__building {
+  color: #34415d !important;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.room-detail-heading__separator {
+  color: #94a3b8 !important;
+  font-size: 14px;
+}
+
+.room-detail-heading__location {
+  color: #64748b !important;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* Nút quay lại */
+
+.room-detail-heading__back.ant-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  gap: 7px;
+  height: 42px;
+  padding: 0 16px;
+  border: 1px solid #536ee7;
+  border-radius: 10px;
+  background: #fff;
+  color: #536ee7;
+  font-size: 13px;
+  font-weight: 700;
+  box-shadow: none;
+  transition: all 0.2s ease;
+}
+
+.room-detail-heading__back.ant-btn:hover {
+  border-color: #4058cf !important;
+  background: #f3f6ff !important;
+  color: #4058cf !important;
+}
+
+/* =========================
+   MAIN CONTENT
+========================= */
+
+.room-detail-content {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(280px, 3fr);
+  align-items: start;
+  gap: 28px;
+  margin-top: 30px;
+}
+
+.room-detail-content__gallery,
+.room-detail-content__contact {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* =========================
+   DESCRIPTION CARD
+========================= */
+
+.room-detail-description.ant-card {
+  width: 100%;
+  margin-top: 24px;
+  border: 1px solid #e3e6f2;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: none;
+  box-sizing: border-box;
+}
+
+.room-detail-description .ant-card-body {
+  padding: 22px 24px;
+}
+
+/* Tiêu đề có vạch xanh phía trước, giống trang chủ */
+.room-detail-description__title.ant-typography,
+.room-detail-amenities__title.ant-typography,
+.room-detail-location__title.ant-typography,
+.similar-rooms__title.ant-typography {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #151b3b;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.room-detail-description__title.ant-typography::before,
+.room-detail-amenities__title.ant-typography::before,
+.room-detail-location__title.ant-typography::before,
+.similar-rooms__title.ant-typography::before {
+  content: "";
+  flex: none;
+  width: 4px;
+  height: 20px;
+  border-radius: 3px;
+  background: linear-gradient(180deg, #6b82f2, #4a5be0);
+}
+
+.room-detail-description__title.ant-typography {
+  margin: 0 0 12px;
+  font-size: 19px;
+}
+
+.room-detail-description__content.ant-typography {
+  display: block;
+  color: #64748b;
+  font-size: 14px;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+
+/* =========================
+   ROOM INFORMATION
+   Thẻ ngang: ô icon màu + nhãn nhỏ + giá trị lớn
+========================= */
+
+.room-detail-info {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  width: 100%;
+  margin: 20px 0 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.room-detail-info__item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  padding: 14px;
+  overflow: hidden;
+  border: 1px solid #e3e6f2;
+  border-radius: 16px;
+  background: #fff;
+  box-sizing: border-box;
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+/* Vệt màu mờ ở góc, cùng tông với icon */
+.room-detail-info__item::after {
+  content: "";
+  position: absolute;
+  top: -34px;
+  right: -34px;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--to) 16%, transparent),
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.room-detail-info__item:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--to) 40%, #e3e6f2);
+  box-shadow: 0 18px 30px -22px color-mix(in srgb, var(--to) 60%, transparent);
+}
+
+.room-detail-info__icon {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 13px;
+  background: linear-gradient(135deg, var(--from), var(--to));
+  box-shadow: 0 10px 18px -10px var(--to);
+  color: #fff;
+  font-size: 20px;
+  transition: transform 0.25s ease;
+}
+
+.room-detail-info__item:hover .room-detail-info__icon {
+  transform: rotate(-6deg) scale(1.06);
+}
+
+.room-detail-info__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.room-detail-info__label {
+  color: #8a93ad;
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.room-detail-info__value {
+  color: #151b3b;
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.room-detail-info__value small {
+  margin-left: 4px;
+  color: #5b6385;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+/* =========================
+   AMENITIES CARD
+========================= */
+
+.room-detail-amenities.ant-card {
+  width: 100%;
+  margin-top: 20px;
+  border: 1px solid #e3e6f2;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: none;
+  box-sizing: border-box;
+}
+
+.room-detail-amenities .ant-card-body {
+  padding: 22px 24px;
+}
+
+.room-detail-amenities__title.ant-typography {
+  margin: 0 0 16px;
+  font-size: 17px;
+}
+
+/* Tiện ích tòa nhà dùng vạch xanh lá để phân biệt với tiện nghi phòng */
+.room-detail-amenities__title--building.ant-typography::before {
+  background: linear-gradient(180deg, #3ec5a5, #159f83);
+}
+
+.room-detail-amenities__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  min-width: 0;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: #f6f7fc;
+}
+
+.room-detail-amenities__check {
+  flex-shrink: 0;
+  margin-top: 1px;
+  font-size: 17px;
+}
+
+.room-detail-amenities__check--room {
+  color: #6b8ce8;
+}
+
+.room-detail-amenities__check--building {
+  color: #55b991;
+}
+
+.room-detail-amenities__name.ant-typography {
+  margin: 0;
+  color: #2c3560;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.room-detail-amenities__divider.ant-divider {
+  margin: 22px 0;
+  border-color: #edf0f5;
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 991px) {
+  .room-detail-content {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+
+  .room-detail-content__contact {
+    width: 100%;
+  }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 767px) {
+  .room-detail-page {
+    padding: 18px 0 24px;
+  }
+
+  .room-detail-container {
+    padding: 0 16px;
+  }
+
+  .room-detail-breadcrumb {
+    margin-bottom: 16px;
+    font-size: 12px;
+  }
+
+  .room-detail-heading {
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .room-detail-heading__title {
+    font-size: 23px !important;
+  }
+
+  .room-detail-heading__address {
+    gap: 5px;
+  }
+
+  .room-detail-heading__building,
+  .room-detail-heading__separator,
+  .room-detail-heading__location {
+    font-size: 12px;
+  }
+
+  .room-detail-heading__back.ant-btn {
+    height: 36px;
+    padding: 0 10px;
+    font-size: 12px;
+  }
+
+  .room-detail-content {
+    gap: 20px;
+    margin-top: 22px;
+  }
+
+  .room-detail-description.ant-card {
+    margin-top: 18px;
+  }
+
+  .room-detail-description .ant-card-body {
+    padding: 16px;
+  }
+
+  .room-detail-description__title.ant-typography {
+    font-size: 17px;
+  }
+
+  .room-detail-description__content.ant-typography {
+    font-size: 13px;
+  }
+
+  .room-detail-info {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .room-detail-info__item {
+    padding: 12px;
+  }
+
+  .room-detail-info__icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 11px;
+    font-size: 17px;
+  }
+
+  .room-detail-info__value {
+    font-size: 16px;
+  }
+
+  .room-detail-amenities.ant-card {
+    margin-top: 16px;
+  }
+
+  .room-detail-amenities .ant-card-body {
+    padding: 16px;
+  }
+
+  .room-detail-amenities__title.ant-typography {
+    font-size: 16px;
+  }
+
+  .room-detail-amenities__title--building.ant-typography {
+    font-size: 14px;
+  }
+}
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width: 380px) {
+  .room-detail-container {
+    padding: 0 12px;
+  }
+
+  .room-detail-heading {
+    gap: 8px;
+  }
+
+  .room-detail-heading__title {
+    font-size: 21px !important;
+  }
+
+  .room-detail-heading__back.ant-btn {
+    height: 34px;
+    padding: 0 8px;
+  }
+
+  .room-detail-info {
+    gap: 8px;
+  }
+
+  .room-detail-info__item {
+    gap: 9px;
+    padding: 10px;
+  }
+
+  .room-detail-info__icon {
+    width: 34px;
+    height: 34px;
+    font-size: 15px;
+  }
+
+  .room-detail-info__label {
+    font-size: 11px;
+  }
+
+  .room-detail-info__value {
+    font-size: 15px;
+  }
+
+  .room-detail-amenities .ant-card-body {
+    padding: 12px;
+  }
+}
+
+/* =========================
+   LANDLORD INFORMATION
+========================= */
+
+.room-detail-landlord.ant-card {
+  width: 100%;
+  margin-top: 20px;
+  border: 1px solid #e3e6f2;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: none;
+  box-sizing: border-box;
+}
+
+/* Vạch xanh bên trái thẻ chủ trọ */
+.room-detail-landlord.ant-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.room-detail-landlord.ant-card::before {
+  content: "";
+  position: absolute;
+  top: 18px;
+  bottom: 18px;
+  left: 0;
+  width: 4px;
+  border-radius: 0 3px 3px 0;
+  background: linear-gradient(180deg, #6b82f2, #4a5be0);
+}
+
+.room-detail-landlord .ant-card-body {
+  padding: 20px;
+}
+
+.room-detail-landlord__profile {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.room-detail-landlord__avatar.ant-avatar {
+  flex-shrink: 0;
+  background: linear-gradient(135deg, #6b82f2, #4a5be0);
+  color: #fff;
+}
+
+.room-detail-landlord__info {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  min-width: 0;
+}
+
+.room-detail-landlord__name {
+  color: #151b3b;
+  font-size: 16px;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+.room-detail-landlord__role {
+  color: #64748b;
+  font-size: 13px;
+}
+
+@media (max-width: 767px) {
+  .room-detail-landlord .ant-card-body {
+    padding: 16px;
+  }
+
+  .room-detail-landlord__profile {
+    gap: 12px;
+  }
+
+  .room-detail-landlord__name {
+    font-size: 15px;
+  }
+}
+
+/* =========================
+   LOCATION (full chiều ngang, cùng bố cục với Phòng tương tự)
+========================= */
+
+.room-detail-location {
+  width: 100%;
+  margin-top: 32px;
+  padding: 24px 0 0;
+  box-sizing: border-box;
+}
+
+.room-detail-location__title.ant-typography {
+  margin: 0 0 16px;
+  font-size: 22px;
+}
+
+.room-detail-location__map-wrap {
+  overflow: hidden;
+  border: 1px solid #e3e6f2;
+  border-radius: 18px 18px 0 0;
+  background: #fff;
+}
+
+.room-detail-location__map {
+  display: block;
+  width: 100%;
+  height: 380px;
+  border: 0;
+}
+
+.room-detail-location__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 16px 20px;
+  border: 1px solid #e3e6f2;
+  border-top: 0;
+  border-radius: 0 0 18px 18px;
+  background: #fff;
+}
+
+.room-detail-location__place {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  min-width: 0;
+}
+
+.room-detail-location__icon {
+  flex-shrink: 0;
+  margin-top: 3px;
+  color: #536ee7;
+  font-size: 16px;
+}
+
+.room-detail-location__text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.room-detail-location__name.ant-typography {
+  color: #151b3b;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.room-detail-location__address.ant-typography {
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.room-detail-location__direction.ant-btn {
+  flex-shrink: 0;
+  height: 42px;
+  padding: 0 20px;
+  border: 0;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #4a5be0, #1e3390);
+  font-size: 13px;
+  font-weight: 700;
+  box-shadow: 0 14px 24px -14px rgba(30, 51, 144, 0.7);
+}
+
+.room-detail-location__direction.ant-btn:hover {
+  background: linear-gradient(135deg, #4a5be0, #1e3390) !important;
+  filter: brightness(1.1);
+}
+
+@media (max-width: 767px) {
+  .room-detail-location {
+    margin-top: 24px;
+    padding-top: 16px;
+  }
+
+  .room-detail-location__title.ant-typography {
+    font-size: 19px;
+  }
+
+  .room-detail-location__map {
+    height: 260px;
+  }
+
+  .room-detail-location__footer {
+    align-items: stretch;
+    flex-direction: column;
+    padding: 14px 16px;
+  }
+
+  .room-detail-location__direction.ant-btn {
+    width: 100%;
+  }
+}
+
+/* =========================
+   SIMILAR ROOMS
+========================= */
+
+.similar-rooms {
+  width: 100%;
+  margin-top: 32px;
+  padding: 24px 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-sizing: border-box;
+}
+
+.similar-rooms__heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.similar-rooms__title.ant-typography {
+  margin: 0 0 8px;
+  font-size: 22px;
+}
+
+.similar-rooms__subtitle {
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.similar-rooms__view-all.ant-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  height: 42px;
+  padding: 0 16px;
+  border-color: #536ee7;
+  border-radius: 10px;
+  color: #536ee7;
+  font-weight: 700;
+  box-shadow: none;
+}
+
+.similar-rooms__view-all.ant-btn:hover {
+  border-color: #4058cf !important;
+  color: #4058cf !important;
+  background: #f3f6ff !important;
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 991px) {
+  .similar-rooms {
+    padding: 20px;
+  }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 767px) {
+  .similar-rooms {
+    margin-top: 24px;
+    padding: 16px;
+  }
+
+  .similar-rooms__heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+
+  .similar-rooms__title.ant-typography {
+    font-size: 19px;
+  }
+
+  .similar-rooms__subtitle {
+    font-size: 12px;
+  }
+
+  .similar-rooms__view-all.ant-btn {
+    height: 36px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 380px) {
+  .similar-rooms {
+    padding: 12px;
+  }
+}
+
+/* =========================
+   ROOM GALLERY
+========================= */
+
+.room-gallery {
+  width: 100%;
+  min-width: 0;
+}
+
+.room-gallery__main {
+  position: relative;
+  width: 100%;
+  height: 430px;
+  overflow: hidden;
+  border-radius: 18px;
+  background: #eef2f8;
+}
+
+.room-gallery__main .ant-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.room-gallery__main .ant-image-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.room-gallery__counter {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: rgba(16, 26, 53, 0.78);
+  color: #fff;
+  font-size: 13px;
+  pointer-events: none;
+}
+
+.room-gallery__thumbnails {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.room-gallery__thumbnail {
+  height: 100px;
+  padding: 0;
+  overflow: hidden;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  background: #f1f5f9;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.room-gallery__thumbnail img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.25s ease;
+}
+
+.room-gallery__thumbnail:hover img {
+  transform: scale(1.04);
+}
+
+.room-gallery__thumbnail--active {
+  border-color: #536ee7;
+}
+
+/* Khung hiển thị khi phòng chưa có ảnh */
+.room-gallery__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 100%;
+  background: #f4f5fa;
+  color: #8a91ad;
+  font-size: 15px;
+}
+
+.room-gallery__empty .anticon {
+  font-size: 40px;
+}
+
+@media (max-width: 991px) {
+  .room-gallery__main {
+    height: 360px;
+  }
+
+  .room-gallery__thumbnail {
+    height: 85px;
+  }
+}
+
+@media (max-width: 767px) {
+  .room-gallery__main {
+    height: 280px;
+    border-radius: 11px;
+  }
+
+  .room-gallery__thumbnails {
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .room-gallery__thumbnail {
+    height: 72px;
+    border-radius: 7px;
+  }
+}
+
+@media (max-width: 400px) {
+  .room-gallery__main {
+    height: 230px;
+  }
+
+  .room-gallery__thumbnail {
+    height: 60px;
+  }
+}

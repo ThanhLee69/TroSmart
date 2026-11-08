@@ -1,0 +1,682 @@
+/* =========================================================
+   MeterReadingDetail - Chi tiết điện nước theo phòng
+   Tiền tố md- ; trạng thái dùng chung class mtr-status với bảng
+   Breakpoint: 1199 / 991 / 767 / 575
+   ========================================================= */
+
+.md-page,
+.md-page * {
+  box-sizing: border-box;
+}
+
+.md-page {
+  --md-ink: #151b3b;
+  --md-muted: #5b6385;
+  --md-line: #e3e6f2;
+  --md-soft: #f8f9fd;
+  --md-primary: #536ee7;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  color: var(--md-ink);
+}
+
+.md-page h1,
+.md-page h2,
+.md-page h3 {
+  margin: 0;
+}
+
+/* ---------- Chung ---------- */
+.md-lbl {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--md-muted);
+}
+
+.md-muted {
+  font-size: 13px;
+  color: var(--md-muted);
+}
+
+.md-big {
+  font-weight: 800;
+  font-size: 26px;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+}
+
+.md-big--empty {
+  font-size: 15px;
+  font-weight: 600;
+  opacity: 0.55;
+}
+
+.md-card {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 24px;
+  background: #ffffff;
+  border: 1px solid var(--md-line);
+  border-radius: 18px;
+  box-shadow:
+    0 1px 2px rgba(21, 27, 59, 0.04),
+    0 6px 20px rgba(21, 27, 59, 0.04);
+}
+
+.md-card__title {
+  position: relative;
+  padding-left: 12px;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.md-card__title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 3px;
+  bottom: 3px;
+  width: 4px;
+  border-radius: 4px;
+  background: var(--md-primary);
+}
+
+.md-card__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 16px;
+}
+
+/* ---------- Nút ---------- */
+.md-page .md-btn.ant-btn {
+  padding: 0 20px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+.md-page .md-btn--outline.ant-btn {
+  color: #3b4bcb;
+  border-color: #c9cfef;
+  background: #ffffff;
+}
+
+.md-page .md-btn--outline.ant-btn:hover {
+  color: #3b4bcb;
+  border-color: #3b4bcb;
+  background: #eef0fd;
+}
+
+.md-page .md-back.ant-btn {
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border-radius: 12px;
+  border-color: var(--md-line);
+  color: #3a4268;
+  background: #ffffff;
+}
+
+.md-page .md-back.ant-btn:hover {
+  color: var(--md-primary);
+  border-color: var(--md-primary);
+}
+
+/* ---------- Trạng thái: giống bảng danh sách ---------- */
+.mtr-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 26px;
+  padding: 0 11px 0 10px;
+  border-radius: 999px;
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  background: var(--bg);
+  color: var(--ink);
+  /* Trong grid không bị kéo giãn: bo ôm theo chữ */
+  justify-self: start;
+  align-self: center;
+  width: fit-content;
+}
+
+.mtr-status__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--dot);
+  flex: none;
+}
+
+.mtr-status--NOT_RECORDED {
+  --bg: #f1f2f7;
+  --ink: #5b6385;
+  --dot: #9aa1bd;
+}
+
+.mtr-status--RECORDED {
+  --bg: #e6f7ee;
+  --ink: #157347;
+  --dot: #22b573;
+}
+
+.mtr-status--INVOICED {
+  --bg: #eaefff;
+  --ink: #3b4bcb;
+  --dot: #536ee7;
+}
+
+.mtr-status--lg {
+  height: 30px;
+  padding: 0 14px 0 12px;
+  font-size: 13.5px;
+}
+
+/* ---------- Header ---------- */
+.md-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 24px;
+}
+
+.md-head__left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+
+.md-head__text {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.md-head__title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.md-head__title h1 {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+}
+
+.md-head__sub {
+  font-size: 14px;
+  color: var(--md-muted);
+}
+
+.md-head__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* ---------- Banner ---------- */
+.md-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px 20px;
+  border-radius: 14px;
+  border: 1px solid;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.md-banner__icon {
+  flex: none;
+  font-size: 20px;
+  line-height: 1.4;
+}
+
+.md-banner__body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.md-banner__body b {
+  font-size: 15px;
+}
+
+.md-banner--success {
+  background: #eefaf3;
+  border-color: #bde8d0;
+  color: #0b5a37;
+}
+
+.md-banner--success .md-banner__icon {
+  color: #22b573;
+}
+
+.md-banner--warning {
+  background: #fff8ea;
+  border-color: #fde0a6;
+  color: #874d00;
+}
+
+.md-banner--warning .md-banner__icon {
+  color: #f59e0b;
+}
+
+/* ---------- Bố cục 2 cột ---------- */
+.md-layout {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.md-main {
+  flex: 2 1 560px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.md-side {
+  flex: 1 1 340px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ---------- Thẻ điện / nước (màu giống cột trong bảng) ---------- */
+.md-meters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.md-meter {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px;
+  border-radius: 16px;
+  border: 1px solid transparent;
+  overflow: hidden;
+}
+
+.md-meter--elec {
+  background: linear-gradient(135deg, #fdf3e4 0%, #fbede1 100%);
+  border-color: #f5d9b4;
+  color: #8a5500;
+}
+
+.md-meter--water {
+  background: linear-gradient(135deg, #eef4fc 0%, #e8f0fb 100%);
+  border-color: #cddcf2;
+  color: #0f336c;
+}
+
+.md-meter__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.md-meter__heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+}
+
+.md-meter__heading .anticon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.75);
+  font-size: 17px;
+}
+
+.md-meter__heading b {
+  font-size: 16px;
+}
+
+.md-meter__price {
+  margin-left: auto;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.7);
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.md-meter__values {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.65);
+}
+
+.md-meter__col {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.md-meter .md-lbl {
+  color: inherit;
+  opacity: 0.7;
+}
+
+.md-meter__arrow {
+  font-size: 20px;
+  opacity: 0.45;
+}
+
+.md-meter__foot {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: 14px;
+}
+
+.md-meter__amount {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-left: auto;
+}
+
+.md-meter__amount b {
+  font-size: 18px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Bộ lọc lịch sử ---------- */
+.md-filter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 12px 16px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: var(--md-soft);
+  border: 1px solid #eef0f8;
+}
+
+.md-filter__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1 1 140px;
+  max-width: 200px;
+}
+
+/* ---------- Bảng lịch sử ---------- */
+.md-table {
+  overflow-x: auto;
+  border: 1px solid var(--md-line);
+  border-radius: 14px;
+}
+
+.md-table__inner {
+  min-width: 640px;
+}
+
+.md-hrow {
+  display: grid;
+  grid-template-columns: 90px 1fr 1fr 1.2fr 150px;
+  gap: 14px;
+  align-items: center;
+  padding: 13px 18px;
+  border-bottom: 1px solid #eef0f8;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  color: inherit;
+}
+
+.md-hrow:last-child {
+  border-bottom: 0;
+}
+
+.md-hrow--head {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--md-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  background: var(--md-soft);
+}
+
+.md-hrow--link {
+  transition: background 0.15s;
+}
+
+.md-hrow--link:hover {
+  background: #fafbff;
+  color: inherit;
+}
+
+/* Kỳ đang xem */
+.md-hrow--link.is-current {
+  background: #f1f4ff;
+  box-shadow: inset 3px 0 0 var(--md-primary);
+}
+
+.md-empty {
+  padding: 28px 18px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--md-muted);
+}
+
+/* ---------- Thông tin ---------- */
+.md-dl {
+  margin: 0;
+}
+
+.md-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 16px;
+  padding: 13px 0;
+  border-bottom: 1px dashed #e8ebf5;
+}
+
+.md-row:first-child {
+  padding-top: 2px;
+}
+
+.md-row:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.md-row dt {
+  flex: 0 0 120px;
+  font-size: 13.5px;
+  color: var(--md-muted);
+}
+
+.md-row dd {
+  margin: 0;
+  flex: 1 1 150px;
+  min-width: 0;
+  font-size: 14.5px;
+  font-weight: 600;
+  word-break: break-word;
+}
+
+/* ---------- Ảnh đồng hồ ---------- */
+.md-photos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.md-photo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.md-photo__img {
+  display: block;
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border: 1px solid var(--md-line);
+  border-radius: 14px;
+  background: #f6f7fc;
+}
+
+.md-photo__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 140px;
+  padding: 8px;
+  border: 1px solid;
+  border-radius: 14px;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.md-photo__empty .anticon {
+  font-size: 28px;
+}
+
+.md-photo__empty--elec {
+  background: #fdf3e4;
+  border-color: #f5d9b4;
+  color: #8a5500;
+}
+
+.md-photo__empty--water {
+  background: #eef4fc;
+  border-color: #cddcf2;
+  color: #0f336c;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media (max-width: 1199px) {
+  .md-main,
+  .md-side {
+    flex-basis: 100%;
+  }
+
+  .md-side {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+  }
+}
+
+@media (max-width: 991px) {
+  .md-head__title h1 {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 767px) {
+  .md-page {
+    gap: 20px;
+  }
+
+  .md-head__title h1 {
+    font-size: 22px;
+  }
+
+  .md-side {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .md-filter__field {
+    max-width: none;
+  }
+}
+
+@media (max-width: 575px) {
+  .md-page {
+    gap: 16px;
+  }
+
+  .md-card {
+    padding: 16px;
+    border-radius: 16px;
+  }
+
+  .md-head__left {
+    gap: 12px;
+  }
+
+  .md-head__actions {
+    width: 100%;
+  }
+
+  .md-head__actions .md-btn.ant-btn {
+    flex: 1 1 100%;
+  }
+
+  .md-meter {
+    padding: 16px;
+  }
+
+  .md-big {
+    font-size: 22px;
+  }
+
+  .md-filter {
+    padding: 12px;
+  }
+
+  .md-filter__field {
+    flex-basis: 100%;
+  }
+
+  .md-filter .md-btn.ant-btn {
+    width: 100%;
+  }
+
+  .md-row dt {
+    flex-basis: 100%;
+  }
+
+  .md-photos {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

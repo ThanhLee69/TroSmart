@@ -1,0 +1,76 @@
+/* Trạng thái: chấm màu + nền bo tròn */
+.ts-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 3px 12px 3px 10px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 20px;
+  white-space: nowrap;
+  background: var(--bg, #f5f5f5);
+  color: var(--c, #595959);
+}
+.ts-pill i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--d, #bfbfbf);
+  flex: none;
+}
+.ts-pill--renting {
+  --bg: #e8f7ee;
+  --c: #15803d;
+  --d: #22c55e;
+}
+.ts-pill--returned {
+  --bg: #f3f4f6;
+  --c: #6b7280;
+  --d: #9ca3af;
+}
+.ts-pill--never {
+  --bg: #e6f0ff;
+  --c: #1d4ed8;
+  --d: #3b82f6;
+}
+.ts-pill--linked {
+  --bg: #f3e8ff;
+  --c: #7e22ce;
+  --d: #a855f7;
+}
+.ts-pill--unlinked {
+  --bg: #fff4e0;
+  --c: #b45309;
+  --d: #f59e0b;
+}
+
+/* Nút thao tác */
+.ts-act.ant-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  color: #595959;
+}
+.ts-act.ant-btn:hover {
+  background: #eef1ff;
+  color: #536ee7;
+}
+
+/* Số điện thoại có icon */
+.ts-phone {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  white-space: nowrap;
+}
+.ts-phone .anticon {
+  font-size: 13px;
+  color: #8a96ba;
+}
+
+/* Chưa có phòng */
+.ts-empty {
+  font-style: italic;
+  color: #a3a9c0;
+}

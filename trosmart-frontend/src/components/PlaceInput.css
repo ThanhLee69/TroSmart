@@ -1,0 +1,92 @@
+/* Ô nhập địa chỉ có gợi ý. Chiều cao đổi bằng biến --place-h ở phần tử cha (mặc định 44px) */
+.place-input.ant-select {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* AutoComplete bản thân là .ant-select: để ô Input bên trong tự vẽ khung, tránh 2 khung đè nhau */
+.place-input .ant-select-selector {
+  height: auto !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.place-input .ant-select-selection-search {
+  position: static !important;
+  inset: auto !important;
+  width: 100%;
+  margin: 0 !important;
+}
+
+.place-input .ant-input-affix-wrapper {
+  align-items: center;
+  width: 100%;
+  height: var(--place-h, 44px);
+  padding-block: 0;
+  padding-inline: 12px 6px;
+}
+
+.place-input .ant-input-affix-wrapper > input.ant-input {
+  height: 100%;
+  padding: 0;
+  font-size: 14px;
+  line-height: calc(var(--place-h, 44px) - 2px);
+}
+
+.place-input .ant-input-suffix {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-inline-start: 6px;
+}
+
+.place-input .ant-input-clear-icon {
+  position: static;
+  margin: 0;
+}
+
+/* Nút định vị */
+.place-input__gps.ant-btn {
+  flex: none;
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  background: #eef0fd;
+  color: #4a5be0;
+}
+
+.place-input__gps.ant-btn:hover {
+  background: #dfe4ff;
+}
+
+.place-input__gps--on.ant-btn,
+.place-input__gps--on.ant-btn:hover {
+  background: #4a5be0 !important;
+  color: #fff !important;
+}
+
+/* Dòng gợi ý */
+.place-option {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 2px 0;
+  white-space: normal;
+}
+
+.place-option__main {
+  color: #151b3b;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.place-option__sub {
+  color: #5b6385;
+  font-size: 12px;
+  line-height: 1.35;
+}

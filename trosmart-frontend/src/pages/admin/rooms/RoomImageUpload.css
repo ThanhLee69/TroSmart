@@ -1,0 +1,183 @@
+.ru {
+  width: 100%;
+  min-width: 0;
+}
+.ru-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+.ru-title {
+  margin: 0 0 4px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #1f2a5a;
+}
+.ru-desc {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #7784a8;
+}
+.ru-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: #eef1ff;
+  color: #4a5be0;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.ru-add.ant-btn {
+  width: 100%;
+  height: 44px;
+  border-radius: 8px;
+  border-color: #c9d1fb;
+  background: #f8f9ff;
+  color: #4a5be0;
+  font-weight: 600;
+}
+.ru .ant-upload,
+.ru .ant-upload-wrapper {
+  width: 100%;
+  display: block;
+}
+.ru-add.ant-btn:hover:not(:disabled) {
+  border-color: #536ee7;
+  background: #eef1ff;
+  color: #3347b8;
+}
+
+.ru-card.ant-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  border: 1px solid #e8ebf5;
+  box-shadow: none;
+  transition: all 0.2s ease;
+}
+.ru-card.ant-card:hover {
+  box-shadow: 0 6px 16px rgba(83, 110, 231, 0.12);
+}
+.ru-card.is-active.ant-card {
+  border: 2px solid #536ee7;
+  box-shadow: 0 0 0 3px rgba(83, 110, 231, 0.12);
+}
+
+.ru-thumb {
+  position: relative;
+  height: clamp(100px, 17vw, 140px);
+  overflow: hidden;
+  background: #f3f5fc;
+  cursor: pointer;
+}
+.ru-thumb .ant-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.ru-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.ru-noimg {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #a3aac8;
+}
+
+.ru-tools {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  display: flex;
+  gap: 5px;
+}
+.ru-tools .ant-btn {
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: 0;
+  background: rgba(255, 255, 255, 0.95);
+  color: #4a5be0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.14);
+}
+.ru-tools .ant-btn-dangerous {
+  color: #cf1322;
+}
+
+.ru-badge {
+  position: absolute;
+  left: 6px;
+  bottom: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: #536ee7;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+}
+
+.ru-foot {
+  padding: 8px 9px 10px;
+}
+.ru-name {
+  margin-bottom: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12px;
+  color: #6b789d;
+}
+.ru-star.ant-btn {
+  height: 30px;
+  border-radius: 6px;
+  font-size: 12px;
+}
+.ru-star.ant-btn-primary {
+  background: #536ee7;
+  border-color: #536ee7;
+  font-weight: 600;
+}
+
+.ru-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 180px;
+  margin-top: 16px;
+  padding: 28px 16px;
+  text-align: center;
+  border: 1.5px dashed #cdd4f5;
+  border-radius: 10px;
+  background: #f8f9fe;
+  color: #aab2dc;
+}
+.ru-empty > svg {
+  font-size: 42px;
+}
+.ru-empty__t {
+  margin: 12px 0 0;
+  color: #5a6393;
+  font-weight: 500;
+}
+.ru-empty__s {
+  margin: 4px 0 0;
+  color: #9aa2c8;
+  font-size: 13px;
+  line-height: 1.6;
+}

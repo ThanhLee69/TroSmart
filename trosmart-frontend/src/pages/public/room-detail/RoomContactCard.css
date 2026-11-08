@@ -1,0 +1,226 @@
+/* ========================================
+   THẺ ĐẶT LỊCH XEM PHÒNG
+======================================== */
+
+.room-contact-card.ant-card {
+  width: 100%;
+  border: 1px solid #e3e6f2;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: none;
+}
+
+.room-contact-card .ant-card-body {
+  padding: 24px;
+}
+
+/* ========================================
+   GIÁ THUÊ
+======================================== */
+
+.room-contact-card__price {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.room-contact-card__price-value.ant-typography {
+  margin: 0;
+  color: #3b4bcb;
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.room-contact-card__price-unit {
+  color: #5b6385;
+  font-size: 14px;
+}
+
+.room-contact-card__divider.ant-divider {
+  margin: 20px 0;
+  border-color: #edf0f5;
+}
+
+/* Tiêu đề form (trước đây màu #d7d9df rất nhạt, gần như không thấy trên nền trắng) */
+/* Tiêu đề có vạch xanh phía trước, giống trang chủ */
+.room-contact-card__title.ant-typography {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 16px;
+  color: #151b3b;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.room-contact-card__title.ant-typography::before {
+  content: "";
+  flex: none;
+  width: 4px;
+  height: 20px;
+  border-radius: 3px;
+  background: linear-gradient(180deg, #6b82f2, #4a5be0);
+}
+
+/* ========================================
+   FORM
+======================================== */
+
+.room-contact-card__form .ant-form-item {
+  margin-bottom: 16px;
+}
+
+.room-contact-card__form .ant-form-item-label {
+  padding-bottom: 6px;
+}
+
+.room-contact-card__form .ant-form-item-label > label {
+  color: #2c3560;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* Ô nhập, ô chọn ngày, ô lời nhắn: cùng viền, bo góc */
+.room-contact-card__form .ant-input,
+.room-contact-card__form .ant-input-affix-wrapper,
+.room-contact-card__form .ant-picker {
+  border-color: #dfe4fb;
+  border-radius: 10px;
+  box-shadow: none;
+}
+
+.room-contact-card__form .ant-input:hover,
+.room-contact-card__form .ant-input-affix-wrapper:hover,
+.room-contact-card__form .ant-picker:hover,
+.room-contact-card__form .ant-input:focus,
+.room-contact-card__form .ant-input-focused,
+.room-contact-card__form .ant-picker-focused {
+  border-color: #536ee7;
+}
+
+.room-contact-card__form .ant-input:focus,
+.room-contact-card__form .ant-input-focused {
+  box-shadow: 0 0 0 3px rgba(83, 110, 231, 0.12);
+}
+
+/* Chiều cao ô nhập */
+.room-contact-card__form .ant-input:not(textarea) {
+  height: 42px;
+}
+
+/* Cỡ chữ trong ô nhập, ngày tháng và placeholder */
+.room-contact-card__form .ant-input,
+.room-contact-card__form .ant-picker-input > input {
+  font-size: 13px;
+}
+
+.room-contact-card__form .ant-input::placeholder,
+.room-contact-card__form .ant-picker-input > input::placeholder {
+  font-size: 13px;
+  color: #a0a6bd;
+}
+
+.room-contact-card__date {
+  width: 100%;
+}
+
+/* Ô lời nhắn: thấp gọn, kéo dãn theo chiều dọc */
+.room-contact-card__form textarea.ant-input {
+  min-height: 96px;
+  padding: 10px 12px;
+  line-height: 1.6;
+  resize: vertical;
+}
+
+/* Bộ đếm ký tự dưới ô lời nhắn */
+.room-contact-card__form .ant-input-textarea-show-count::after {
+  margin-top: 4px;
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+/* Thông báo lỗi dưới ô nhập */
+.room-contact-card__form .ant-form-item-explain-error {
+  font-size: 12px;
+}
+
+/* Ô ẩn chống bot (honeypot): đẩy ra ngoài màn hình, không dùng display:none
+   vì bot dễ nhận ra */
+.room-contact-card__hp {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* ========================================
+   NÚT
+======================================== */
+
+.room-contact-card__submit {
+  margin-bottom: 12px !important;
+}
+
+.room-contact-card__submit .ant-btn {
+  height: 42px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #4a5be0, #1e3390);
+  font-size: 13px;
+  font-weight: 700;
+  box-shadow: 0 14px 24px -14px rgba(30, 51, 144, 0.7);
+}
+
+.room-contact-card__submit .ant-btn:hover {
+  background: linear-gradient(135deg, #4a5be0, #1e3390) !important;
+  filter: brightness(1.1);
+}
+
+.room-contact-card__zalo.ant-btn {
+  height: 42px;
+  padding: 0 12px;
+  border: 1px solid #536ee7;
+  border-radius: 10px;
+  background: #fff;
+  color: #536ee7;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.room-contact-card__zalo.ant-btn:hover {
+  border-color: #4058cf !important;
+  background: #f3f6ff !important;
+  color: #4058cf !important;
+}
+
+.room-contact-card__note {
+  margin-top: 15px;
+  color: #8a93ad;
+  font-size: 12px;
+  line-height: 1.8;
+  text-align: center;
+}
+
+/* ========================================
+   ĐIỆN THOẠI
+======================================== */
+
+@media (max-width: 767px) {
+  .room-contact-card .ant-card-body {
+    padding: 20px 16px;
+  }
+
+  .room-contact-card__price-value.ant-typography {
+    font-size: 25px;
+  }
+
+  .room-contact-card__title.ant-typography {
+    font-size: 19px;
+  }
+}

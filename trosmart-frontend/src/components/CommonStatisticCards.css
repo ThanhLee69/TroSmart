@@ -1,0 +1,51 @@
+/* ========================================
+   THẺ THỐNG KÊ
+   Phớt màu ở góc phải theo màu của thẻ,
+   rê chuột thì thẻ nhích lên và có bóng cùng màu.
+   Màu lấy từ biến --stat-color (đặt trong JSX).
+======================================== */
+
+.stat-card.ant-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  background:
+    radial-gradient(
+      circle at 100% 0%,
+      color-mix(in srgb, var(--stat-color) 16%, transparent) 0%,
+      color-mix(in srgb, var(--stat-color) 6%, transparent) 38%,
+      transparent 68%
+    ),
+    #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.stat-card.ant-card:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 16px 28px -14px color-mix(in srgb, var(--stat-color) 45%, transparent),
+    0 4px 10px -4px color-mix(in srgb, var(--stat-color) 22%, transparent);
+}
+
+/* Ô icon nghiêng nhẹ khi rê chuột */
+.stat-card__icon {
+  transition: transform 0.25s ease;
+}
+
+.stat-card.ant-card:hover .stat-card__icon {
+  transform: rotate(-6deg) scale(1.06);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stat-card.ant-card,
+  .stat-card__icon {
+    transition: none;
+  }
+
+  .stat-card.ant-card:hover {
+    transform: none;
+  }
+}

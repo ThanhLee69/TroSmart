@@ -1,0 +1,273 @@
+/* ===== Thanh menu ===== */
+.public-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  background: #fff;
+  border-bottom: 1px solid #e3e6f2;
+}
+
+.public-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  max-width: 1280px;
+  height: 68px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Logo */
+.public-header__logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  border-radius: 8px;
+}
+
+.public-header__logo img {
+  display: block;
+  width: 150px;
+  max-height: 40px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Menu */
+.public-header__nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  min-width: 0;
+  gap: 4px;
+}
+
+.public-header__link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 18px;
+  border-radius: 999px;
+  color: #3a4268;
+  font-size: 15px;
+  font-weight: 500;
+  white-space: nowrap;
+  text-decoration: none;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+
+.public-header__link:hover {
+  background: #f4f5fd;
+  color: #3b4bcb;
+}
+
+.public-header__link--active,
+.public-header__link--active:hover {
+  background: #eef0fd;
+  color: #3b4bcb;
+  font-weight: 600;
+}
+
+/* Nút bên phải */
+.public-header__actions {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 8px;
+}
+
+.public-header__login {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 20px;
+  border: 1px solid #c9cff1;
+  border-radius: 12px;
+  color: #3b4bcb;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    background 0.2s,
+    border-color 0.2s;
+}
+
+.public-header__login:hover {
+  border-color: #536ee7;
+  background: #eef0fd;
+  color: #3b4bcb;
+}
+
+/* Nút mở menu: chỉ hiện trên điện thoại */
+.public-header__burger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid #e3e6f2;
+  border-radius: 12px;
+  background: #fff;
+  color: #3b4bcb;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.public-header__link:focus-visible,
+.public-header__login:focus-visible,
+.public-header__burger:focus-visible,
+.public-header__logo:focus-visible {
+  outline: 2px solid #536ee7;
+  outline-offset: 2px;
+}
+
+/* Tablet nhỏ: thu hẹp khoảng cách để đủ chỗ */
+@media (max-width: 991px) {
+  .public-header__inner {
+    gap: 12px;
+    padding: 0 20px;
+  }
+
+  .public-header__link {
+    padding: 0 14px;
+  }
+
+  .public-header__login {
+    padding: 0 16px;
+  }
+}
+
+/* Điện thoại: chỉ còn logo và nút menu */
+@media (max-width: 767px) {
+  .public-header__inner {
+    height: 60px;
+    padding: 0 16px;
+  }
+
+  .public-header__logo img {
+    width: 128px;
+  }
+
+  .public-header__nav,
+  .public-header__login {
+    display: none;
+  }
+
+  .public-header__burger {
+    display: inline-flex;
+  }
+}
+
+/* ===== Menu trượt trên điện thoại (Drawer) ===== */
+.public-drawer .ant-drawer-header {
+  padding: 12px 16px;
+  border-bottom: 1px solid #e3e6f2;
+}
+
+.public-drawer .ant-drawer-body {
+  padding: 16px;
+}
+
+.public-drawer .ant-drawer-footer {
+  padding: 16px 16px calc(16px + env(safe-area-inset-bottom, 0px));
+  border-top: 1px solid #e3e6f2;
+}
+
+.public-drawer__brand {
+  display: inline-flex;
+  align-items: center;
+}
+
+.public-drawer__brand img {
+  display: block;
+  width: 118px;
+  max-height: 34px;
+  height: auto;
+  object-fit: contain;
+}
+
+.public-drawer__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid #e3e6f2;
+  border-radius: 12px;
+  background: #fff;
+  color: #3b4bcb;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.public-drawer__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.public-drawer__link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 48px;
+  padding: 0 16px;
+  border-radius: 12px;
+  color: #3a4268;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.public-drawer__link:hover {
+  background: #f4f5fd;
+  color: #3b4bcb;
+}
+
+.public-drawer__link--active,
+.public-drawer__link--active:hover {
+  background: #eef0fd;
+  color: #3b4bcb;
+  font-weight: 600;
+}
+
+.public-drawer__arrow {
+  font-size: 12px;
+  color: #8f98d6;
+}
+
+.public-drawer__login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  border: 1px solid #c9cff1;
+  border-radius: 12px;
+  color: #3b4bcb;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.public-drawer__login:hover {
+  border-color: #536ee7;
+  background: #eef0fd;
+  color: #3b4bcb;
+}
+
+.public-drawer__link:focus-visible,
+.public-drawer__login:focus-visible,
+.public-drawer__close:focus-visible,
+.public-drawer__brand:focus-visible {
+  outline: 2px solid #536ee7;
+  outline-offset: 2px;
+}

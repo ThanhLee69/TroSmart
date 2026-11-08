@@ -1,0 +1,434 @@
+/* =========================
+   LOẠI SỰ CỐ, MỨC ĐỘ (chấm màu)
+   ========================= */
+
+.issue-dot-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #3a4268;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.issue-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--dot-color, #8c8c8c);
+}
+
+/* Trạng thái: chấm màu + nền bo tròn */
+.issue-status {
+  min-height: 28px;
+  padding: 0 12px;
+  border-radius: 999px;
+  background: var(--status-bg);
+  color: var(--status-color);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.issue-status .issue-dot {
+  background: var(--status-color);
+}
+
+/* Cột phòng trong bảng */
+.issue-room-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  line-height: 1.4;
+}
+
+.issue-room-number {
+  color: #262b3d;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.issue-building-name {
+  color: #8c8c8c;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+/* =========================
+   DRAWER CHI TIẾT SỰ CỐ
+   (dán thêm vào cuối IssuePage.css)
+   ========================= */
+
+.issue-drawer .ant-drawer-content-wrapper {
+  max-width: 100vw;
+}
+
+.issue-drawer .ant-drawer-body {
+  padding: 20px;
+  background: #f7f8fc;
+}
+
+.issue-drawer .ant-drawer-footer {
+  padding: 12px 20px;
+}
+
+.issue-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Khối tiêu đề */
+.issue-detail__hero,
+.issue-detail__grid,
+.issue-detail__block {
+  padding: 16px;
+  border: 1px solid #e8eaf3;
+  border-radius: 14px;
+  background: #fff;
+}
+
+/* Phần đầu: nền nhạt theo màu trạng thái */
+.issue-detail__hero {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-color: color-mix(in srgb, var(--hero-color, #536ee7) 22%, #fff);
+  background: linear-gradient(135deg, var(--hero-bg, #f3f5ff) 0%, #fff 78%);
+}
+
+.issue-detail__hero-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.issue-detail__hero .issue-status {
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(21, 27, 59, 0.08);
+}
+
+.issue-detail__id {
+  color: #8c92ad;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.issue-detail__title {
+  margin: 0;
+  color: #151b3b;
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+/* Hai thẻ loại sự cố và mức độ */
+.issue-detail__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.issue-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 30px;
+  padding: 0 12px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--tag-color) 12%, #fff);
+  color: #262b3d;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.issue-tag em {
+  color: #7a82a6;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+}
+
+/* Lưới thông tin 2 cột */
+.issue-detail__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px 12px;
+}
+
+.issue-info {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  min-width: 0;
+}
+
+.issue-info > .anticon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: #eef1ff;
+  color: #536ee7;
+  font-size: 15px;
+}
+
+.issue-info > div {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.4;
+}
+
+.issue-info span {
+  color: #8c92ad;
+  font-size: 12px;
+}
+
+.issue-info b {
+  color: #262b3d;
+  font-size: 14px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.issue-info small {
+  color: #8c8c8c;
+  font-size: 12px;
+}
+
+/* Khối mô tả, ghi chú */
+.issue-detail__block h4 {
+  margin: 0 0 8px;
+  color: #3a4268;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.issue-detail__block p {
+  margin: 0;
+  color: #262b3d;
+  font-size: 14px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+.issue-detail__block p.is-empty {
+  color: #9aa0b8;
+  font-style: italic;
+}
+
+/* Timeline tiến trình */
+.issue-tl {
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.issue-tl__item {
+  position: relative;
+  display: flex;
+  gap: 14px;
+  padding-bottom: 20px;
+}
+
+.issue-tl__item:last-child {
+  padding-bottom: 0;
+}
+
+/* Đường nối giữa các mốc */
+.issue-tl__item::before {
+  content: "";
+  position: absolute;
+  top: 24px;
+  bottom: 0;
+  left: 11px;
+  width: 2px;
+  background: #e3e6f2;
+}
+
+.issue-tl__item:last-child::before {
+  display: none;
+}
+
+.issue-tl__item.is-done::before {
+  background: var(--tl-color);
+}
+
+.issue-tl__dot {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 24px;
+  height: 24px;
+  border: 2px solid #d5d9ee;
+  border-radius: 50%;
+  background: #fff;
+  color: #fff;
+  font-size: 12px;
+}
+
+.issue-tl__item.is-done .issue-tl__dot,
+.issue-tl__item.is-cancelled .issue-tl__dot {
+  border-color: var(--tl-color);
+  background: var(--tl-color);
+}
+
+/* Mốc hiện tại: vòng sáng */
+.issue-tl__item.is-current .issue-tl__dot {
+  border-color: var(--tl-color);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--tl-color) 18%, transparent);
+}
+
+.issue-tl__item.is-current .issue-tl__dot::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--tl-color);
+}
+
+.issue-tl__body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  padding-top: 1px;
+  line-height: 1.4;
+}
+
+.issue-tl__body b {
+  color: #262b3d;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.issue-tl__body span,
+.issue-tl__body time {
+  color: #8c92ad;
+  font-size: 12.5px;
+}
+
+.issue-tl__item.is-todo .issue-tl__body b {
+  color: #9aa0b8;
+  font-weight: 500;
+}
+
+.issue-tl__item.is-current .issue-tl__body b {
+  color: var(--tl-color);
+}
+
+@media (max-width: 480px) {
+  .issue-drawer .ant-drawer-body {
+    padding: 14px;
+  }
+
+  .issue-detail__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* =========================
+   NÚT Ở CHÂN DRAWER
+   ========================= */
+
+.issue-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.issue-footer__main {
+  display: flex;
+  gap: 10px;
+}
+
+.issue-btn.ant-btn {
+  height: 42px;
+  padding: 0 18px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  transition:
+    background 0.15s,
+    box-shadow 0.15s,
+    transform 0.15s;
+}
+
+/* Nút chính: nền chuyển màu, bóng nhẹ */
+.issue-btn--primary.ant-btn-primary {
+  border: 0;
+  background: linear-gradient(135deg, #4a5be0, #6b7bf0);
+  box-shadow: 0 8px 16px -8px rgba(74, 91, 224, 0.8);
+}
+
+.issue-btn--primary.ant-btn-primary:not(:disabled):hover {
+  background: linear-gradient(135deg, #3b4bcb, #5b6be6);
+  box-shadow: 0 10px 18px -8px rgba(74, 91, 224, 0.9);
+  transform: translateY(-1px);
+}
+
+/* Nút đóng: viền nhạt */
+.issue-btn--close.ant-btn {
+  border-color: #d5d9ee;
+  background: #fff;
+  color: #3a4268;
+}
+
+.issue-btn--close.ant-btn:not(:disabled):hover {
+  border-color: #b9c0ee;
+  background: #f4f5fd;
+  color: #3b4bcb;
+}
+
+/* Nút hủy: nền đỏ nhạt, rê chuột đậm lên */
+.issue-btn--cancel.ant-btn-dangerous {
+  border-color: transparent;
+  background: #fff1f0;
+  color: #cf1322;
+}
+
+.issue-btn--cancel.ant-btn-dangerous:not(:disabled):hover {
+  border-color: transparent;
+  background: #ffe1de;
+  color: #a8071a;
+}
+
+/* Điện thoại: nút xếp dọc, nút chính nằm trên và rộng hết cỡ */
+@media (max-width: 480px) {
+  .issue-footer {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  .issue-footer__main {
+    width: 100%;
+  }
+
+  .issue-footer__main .ant-btn {
+    flex: 1;
+  }
+
+  .issue-footer > span:empty {
+    display: none;
+  }
+
+  .issue-footer > .ant-btn,
+  .issue-footer > .ant-popover-open {
+    width: 100%;
+  }
+}

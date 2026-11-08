@@ -1,0 +1,158 @@
+/* Thẻ phòng dùng chung (trang chủ, tìm phòng, phòng tương tự) */
+.public-room-card {
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid #e6eaf2;
+  border-radius: 14px;
+  transition: all 0.25s ease;
+}
+
+.public-room-card:hover {
+  border-color: #cbd6ff;
+  box-shadow: 0 8px 24px rgba(40, 60, 120, 0.09);
+  transform: translateY(-3px);
+}
+
+.public-room-card .ant-card-body {
+  padding: 16px;
+}
+
+/* Ảnh phòng */
+.public-room-card__image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 190px;
+  overflow: hidden;
+  background: #f1f5f9;
+}
+
+.public-room-card__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.public-room-card:hover .public-room-card__image {
+  transform: scale(1.04);
+}
+
+/* Nhãn còn trống */
+.public-room-card__status.ant-tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  margin: 0;
+  padding: 4px 10px;
+  border: none;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* Tên phòng và loại phòng */
+.public-room-card__name-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 40px;
+}
+
+.public-room-card__name.ant-typography {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  color: #172554;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.5;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.public-room-card__type.ant-tag {
+  flex-shrink: 0;
+  max-width: 48%;
+  margin: 0;
+  padding: 3px 8px;
+  overflow: hidden;
+  border-color: #d9e2ff;
+  border-radius: 20px;
+  background: #f5f7ff;
+  color: #536ee7;
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Thông tin phòng */
+.public-room-card__details {
+  width: 100%;
+}
+
+.public-room-card__detail {
+  display: flex;
+  flex-wrap: wrap;
+  color: #64748b;
+  font-size: 12px;
+}
+
+.public-room-card__detail .anticon {
+  color: #536ee7;
+  font-size: 15px;
+}
+
+.public-room-card__detail .ant-typography {
+  color: #64748b;
+  font-size: 12px;
+}
+
+/* Khoảng cách (khi tìm theo vị trí) */
+.public-room-card__detail.public-room-card__distance {
+  width: fit-content;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: #e3f3f6;
+}
+
+.public-room-card__distance .anticon,
+.public-room-card__distance .ant-typography {
+  color: #0f5e6c;
+  font-weight: 600;
+}
+
+/* Giá phòng */
+.public-room-card__divider.ant-divider {
+  margin: 16px 0 14px;
+  border-color: #e7ebf3;
+}
+
+.public-room-card__price {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.public-room-card__price-value {
+  color: #2458bd;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.public-room-card__price-unit {
+  color: #64748b;
+  font-size: 12px;
+}
+
+@media (max-width: 767px) {
+  .public-room-card__image-wrapper {
+    height: 210px;
+  }
+}

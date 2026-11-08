@@ -1,0 +1,139 @@
+/* =========================================================
+   HÀNG TÌM KIẾM VÀ LỌC DÙNG CHUNG
+   Dùng: <Row gutter={[10, 10]} className="app-filter"> ... </Row>
+   Nút xóa lọc: <Button className="app-filter__clear">Xóa lọc</Button>
+   Import một lần ở App.jsx hoặc index.js, các trang không cần import lại.
+   ========================================================= */
+
+/* Chiều cao, bo góc, cỡ chữ chung cho mọi ô */
+.app-filter .ant-input-affix-wrapper,
+.app-filter .ant-input:not(textarea),
+.app-filter .ant-input-number,
+.app-filter .ant-picker,
+.app-filter .ant-select-single .ant-select-selector,
+.app-filter .ant-btn {
+  height: 38px;
+  border-radius: 10px;
+  font-size: 13.5px;
+}
+
+/* Ô chọn nhiều giá trị: cao tối thiểu 38px, tự giãn khi có nhiều thẻ */
+.app-filter .ant-select-multiple .ant-select-selector {
+  min-height: 38px;
+  border-radius: 10px;
+  font-size: 13.5px;
+}
+
+/* ---------- Ô nhập, ô tìm kiếm, số, ngày ---------- */
+.app-filter .ant-input-affix-wrapper,
+.app-filter .ant-input:not(textarea),
+.app-filter .ant-input-number,
+.app-filter .ant-picker {
+  padding: 0 12px;
+  border-color: #e3e6f2;
+  background: #f7f8fd;
+  box-shadow: none;
+  transition:
+    border-color 0.15s,
+    background 0.15s,
+    box-shadow 0.15s;
+}
+
+/* Input nằm trong ô có icon hoặc nút xóa: nền trong suốt, không viền riêng */
+.app-filter .ant-input-affix-wrapper > input.ant-input,
+.app-filter .ant-input-number-input,
+.app-filter .ant-picker-input > input {
+  background: transparent;
+  font-size: 13.5px;
+}
+
+.app-filter .ant-input-number-input {
+  height: 36px;
+  padding: 0;
+}
+
+.app-filter .ant-input-number {
+  width: 100%;
+}
+
+.app-filter .ant-picker {
+  width: 100%;
+}
+
+.app-filter .ant-input-affix-wrapper:hover,
+.app-filter .ant-input:not(textarea):hover,
+.app-filter .ant-input-number:hover,
+.app-filter .ant-picker:hover {
+  border-color: #b9c0ee;
+  background: #f7f8fd;
+}
+
+.app-filter .ant-input-affix-wrapper-focused,
+.app-filter .ant-input:not(textarea):focus,
+.app-filter .ant-input-number-focused,
+.app-filter .ant-picker-focused {
+  border-color: #536ee7;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(83, 110, 231, 0.12);
+}
+
+/* Ô tìm kiếm có icon: tránh viền đôi khi input bên trong cũng có viền */
+.app-filter .ant-input-affix-wrapper > input.ant-input {
+  height: auto;
+  border: 0;
+  box-shadow: none;
+}
+
+/* ---------- Ô chọn ---------- */
+.app-filter .ant-select:not(.ant-select-disabled) .ant-select-selector {
+  padding: 0 12px;
+  border-color: #e3e6f2;
+  background: #f7f8fd;
+  box-shadow: none;
+  transition:
+    border-color 0.15s,
+    background 0.15s,
+    box-shadow 0.15s;
+}
+
+.app-filter .ant-select-single .ant-select-selection-item,
+.app-filter .ant-select-single .ant-select-selection-placeholder {
+  line-height: 36px;
+}
+
+.app-filter .ant-select-selection-placeholder,
+.app-filter .ant-input::placeholder,
+.app-filter .ant-picker-input > input::placeholder,
+.app-filter .ant-input-number-input::placeholder {
+  color: #8c92ad;
+}
+
+.app-filter .ant-select:not(.ant-select-disabled):hover .ant-select-selector {
+  border-color: #b9c0ee;
+}
+
+.app-filter .ant-select-focused .ant-select-selector {
+  border-color: #536ee7 !important;
+  background: #fff !important;
+  box-shadow: 0 0 0 3px rgba(83, 110, 231, 0.12) !important;
+}
+
+.app-filter .ant-select-arrow,
+.app-filter .ant-picker-suffix {
+  color: #8c92ad;
+}
+
+/* ---------- Nút xóa lọc ---------- */
+.app-filter__clear.ant-btn {
+  border-color: #c9cff1;
+  background: #fff;
+  color: #3b4bcb;
+  font-weight: 600;
+  box-shadow: none;
+}
+
+.app-filter__clear.ant-btn:hover {
+  border-color: #536ee7;
+  background: #eef0fd;
+  color: #3b4bcb;
+}

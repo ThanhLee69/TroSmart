@@ -1,0 +1,69 @@
+/* ===== Trạng thái phòng: chấm màu + nền bo tròn ===== */
+.rp-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 3px 12px 3px 10px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 20px;
+  white-space: nowrap;
+  background: var(--bg, #f3f4f6);
+  color: var(--c, #6b7280);
+}
+.rp-pill i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--d, #9ca3af);
+  flex: none;
+}
+.rp-pill--green {
+  --bg: #e8f7ee;
+  --c: #15803d;
+  --d: #22c55e;
+}
+.rp-pill--orange {
+  --bg: #fff4e0;
+  --c: #b45309;
+  --d: #f59e0b;
+}
+.rp-pill--red {
+  --bg: #fff1f0;
+  --c: #cf1322;
+  --d: #f5222d;
+}
+.rp-pill--blue {
+  --bg: #e6f0ff;
+  --c: #1d4ed8;
+  --d: #3b82f6;
+}
+
+/* ===== Loại phòng: chấm màu trước chữ ===== */
+.rp-type {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  font-weight: 500;
+}
+.rp-type i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--d, #9ca3af);
+  flex: none;
+}
+.rp-type--blue {
+  --d: #3b82f6;
+}
+.rp-type--purple {
+  --d: #a855f7;
+}
+.rp-type--teal {
+  --d: #14b8a6;
+}
+.rp-type--amber {
+  --d: #f59e0b;
+}

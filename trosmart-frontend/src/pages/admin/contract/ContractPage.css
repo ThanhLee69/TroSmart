@@ -1,0 +1,41 @@
+/* ===== Trạng thái hợp đồng: chấm màu + nền bo tròn (giống trang phòng) ===== */
+.ct-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 3px 12px 3px 10px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 20px;
+  white-space: nowrap;
+  background: var(--bg, #f3f4f6);
+  color: var(--c, #6b7280);
+}
+.ct-pill i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--d, #9ca3af);
+  flex: none;
+}
+.ct-pill--gray {
+  --bg: #f1f2f6;
+  --c: #6b7390;
+  --d: #9ca3af;
+}
+.ct-pill--green {
+  --bg: #e8f7ee;
+  --c: #15803d;
+  --d: #22c55e;
+}
+.ct-pill--orange {
+  --bg: #fff4e0;
+  --c: #b45309;
+  --d: #f59e0b;
+}
+.ct-pill--red {
+  --bg: #fff1f0;
+  --c: #cf1322;
+  --d: #f5222d;
+}

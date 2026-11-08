@@ -1,0 +1,54 @@
+/* =========================================================
+   Trang Quản lý dịch vụ (ServicePage)
+   Tiền tố svc- để không đụng CSS của trang khác
+   ========================================================= */
+
+/* Loại tính phí: chấm màu + chữ */
+.svc-type {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.svc-type__dot {
+  flex: 0 0 auto;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  position: relative;
+  top: 1px;
+}
+
+/* Mặc định: nền nhạt, viền màu, chấm màu */
+.svc-default {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 26px;
+  padding: 0 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.svc-default__dot {
+  flex: 0 0 auto;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  position: relative;
+  top: 1px;
+}
+
+/* Dịch vụ hệ thống: icon khóa thay cho nút xóa */
+.svc-lock {
+  display: inline-flex;
+  cursor: not-allowed;
+}
+
+.svc-lock .ant-btn {
+  color: #a3a9c4;
+  pointer-events: none;
+}

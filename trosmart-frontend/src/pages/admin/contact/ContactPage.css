@@ -1,0 +1,410 @@
+/* =========================
+   NHU CẦU (chấm màu) VÀ TRẠNG THÁI
+   ========================= */
+
+.cm-dot-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #3a4268;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.cm-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--dot-color, #8c8c8c);
+}
+
+/* Trạng thái: chấm màu + nền bo tròn */
+.cm-status {
+  min-height: 28px;
+  padding: 0 12px;
+  border-radius: 999px;
+  background: var(--status-bg);
+  color: var(--status-color);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.cm-status .cm-dot {
+  background: var(--status-color);
+}
+
+/* Cột khách / phòng trong bảng */
+.cm-room-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  line-height: 1.4;
+}
+
+.cm-room-number {
+  color: #262b3d;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.cm-building-name {
+  color: #8c8c8c;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+/* =========================
+   DRAWER CHI TIẾT LIÊN HỆ
+   
+   ========================= */
+
+.cm-drawer .ant-drawer-content-wrapper {
+  max-width: 100vw;
+}
+
+.cm-drawer .ant-drawer-body {
+  padding: 20px;
+  background: #f7f8fc;
+}
+
+.cm-drawer .ant-drawer-footer {
+  padding: 12px 20px;
+}
+
+.cm-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Khối tiêu đề */
+.cm-detail__hero,
+.cm-detail__grid,
+.cm-detail__block {
+  padding: 16px;
+  border: 1px solid #e8eaf3;
+  border-radius: 14px;
+  background: #fff;
+}
+
+/* Phần đầu: nền nhạt theo màu trạng thái */
+.cm-detail__hero {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-color: color-mix(in srgb, var(--hero-color, #536ee7) 22%, #fff);
+  background: linear-gradient(135deg, var(--hero-bg, #f3f5ff) 0%, #fff 78%);
+}
+
+.cm-detail__hero-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.cm-detail__hero .cm-status {
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(21, 27, 59, 0.08);
+}
+
+.cm-detail__id {
+  color: #8c92ad;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.cm-detail__title {
+  margin: 0;
+  color: #151b3b;
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+/* Các thẻ nhu cầu, phòng */
+.cm-detail__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.cm-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 30px;
+  padding: 0 12px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--tag-color) 12%, #fff);
+  color: #262b3d;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.cm-tag em {
+  color: #7a82a6;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+}
+
+/* Lưới thông tin 2 cột */
+.cm-detail__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px 12px;
+}
+
+.cm-info {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  min-width: 0;
+}
+
+.cm-info > .anticon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: #eef1ff;
+  color: #536ee7;
+  font-size: 15px;
+}
+
+.cm-info > div {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.4;
+}
+
+.cm-info span {
+  color: #8c92ad;
+  font-size: 12px;
+}
+
+.cm-info b {
+  color: #262b3d;
+  font-size: 14px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.cm-info small {
+  color: #8c8c8c;
+  font-size: 12px;
+}
+
+/* Khối nội dung, ghi chú */
+.cm-detail__block h4 {
+  margin: 0 0 8px;
+  color: #3a4268;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.cm-detail__block p {
+  margin: 0;
+  color: #262b3d;
+  font-size: 14px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+.cm-detail__block p.is-empty {
+  color: #9aa0b8;
+  font-style: italic;
+}
+
+@media (max-width: 480px) {
+  .cm-drawer .ant-drawer-body {
+    padding: 14px;
+  }
+
+  .cm-detail__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* =========================
+   NÚT Ở CHÂN DRAWER
+   ========================= */
+
+.cm-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.cm-footer__main {
+  display: flex;
+  gap: 10px;
+}
+
+.cm-btn.ant-btn {
+  height: 42px;
+  padding: 0 18px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  transition:
+    background 0.15s,
+    box-shadow 0.15s,
+    transform 0.15s;
+}
+
+/* Nút chính: nền chuyển màu, bóng nhẹ */
+.cm-btn--primary.ant-btn-primary {
+  border: 0;
+  background: linear-gradient(135deg, #4a5be0, #6b7bf0);
+  box-shadow: 0 8px 16px -8px rgba(74, 91, 224, 0.8);
+}
+
+.cm-btn--primary.ant-btn-primary:not(:disabled):hover {
+  background: linear-gradient(135deg, #3b4bcb, #5b6be6);
+  box-shadow: 0 10px 18px -8px rgba(74, 91, 224, 0.9);
+  transform: translateY(-1px);
+}
+
+/* Nút đóng: viền nhạt */
+.cm-btn--close.ant-btn {
+  border-color: #d5d9ee;
+  background: #fff;
+  color: #3a4268;
+}
+
+.cm-btn--close.ant-btn:not(:disabled):hover {
+  border-color: #b9c0ee;
+  background: #f4f5fd;
+  color: #3b4bcb;
+}
+
+/* Nút hủy: nền đỏ nhạt, rê chuột đậm lên */
+.cm-btn--cancel.ant-btn-dangerous {
+  border-color: transparent;
+  background: #fff1f0;
+  color: #cf1322;
+}
+
+.cm-btn--cancel.ant-btn-dangerous:not(:disabled):hover {
+  border-color: transparent;
+  background: #ffe1de;
+  color: #a8071a;
+}
+
+/* Điện thoại: nút xếp dọc, nút chính nằm trên và rộng hết cỡ */
+@media (max-width: 480px) {
+  .cm-footer {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  .cm-footer__main {
+    width: 100%;
+    flex-direction: column-reverse;
+  }
+
+  .cm-footer__main .ant-btn {
+    flex: 1;
+  }
+
+  .cm-footer > span:empty {
+    display: none;
+  }
+
+  .cm-footer > .ant-btn,
+  .cm-footer > .ant-popover-open {
+    width: 100%;
+  }
+}
+
+/* =========================
+   LIÊN HỆ: PHẦN RIÊNG
+   ========================= */
+
+/* Xem nhanh nội dung trong bảng */
+.cm-preview {
+  display: block;
+  max-width: 260px;
+  overflow: hidden;
+  color: #3a4268;
+  font-size: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cm-muted {
+  color: #9aa0b8;
+}
+
+/* Nút gọi nhanh / Zalo trong drawer */
+.cm-quick {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.cm-quick__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 0 14px;
+  border: 1px solid #d5d9ee;
+  border-radius: 12px;
+  background: #fff;
+  color: #3a4268;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    background 0.15s,
+    border-color 0.15s,
+    color 0.15s;
+}
+
+.cm-quick__btn:hover {
+  border-color: #b9c0ee;
+  background: #f4f5fd;
+  color: #3b4bcb;
+}
+
+/* Liên kết trong lưới thông tin */
+.cm-info a {
+  color: #262b3d;
+  font-size: 14px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+  text-decoration: none;
+}
+
+.cm-info a:hover {
+  color: #3b4bcb;
+}
+
+/* Ô ghi chú nội bộ */
+.cm-note.ant-input {
+  border-radius: 10px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+@media (max-width: 480px) {
+  .cm-quick {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

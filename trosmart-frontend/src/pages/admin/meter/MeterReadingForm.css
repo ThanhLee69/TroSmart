@@ -1,0 +1,315 @@
+/* ===== Form nhập chỉ số điện nước (theo design) ===== */
+
+/* Khung modal */
+.mr-modal .ant-modal-content {
+  padding: 0;
+  border-radius: 20px;
+  box-shadow: 0 30px 80px rgba(13, 20, 62, 0.35);
+}
+
+.mr-modal .ant-modal-header {
+  margin: 0;
+  padding: 16px 56px;
+  border-bottom: 1px solid #eef0f8;
+  border-radius: 20px 20px 0 0;
+}
+
+.mr-modal .ant-modal-body {
+  padding: 14px 24px 4px;
+}
+
+.mr-modal .ant-modal-footer {
+  margin: 0;
+  padding: 8px 24px 20px;
+}
+
+/* Nút đóng: ô vuông xám 40px */
+.mr-modal .ant-modal-close {
+  top: 14px;
+  right: 20px;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: #f1f3fb;
+  color: #3a4268;
+}
+
+.mr-modal .ant-modal-close:hover {
+  background: #e6e9f6;
+}
+
+/* Tiêu đề (giống form Tòa nhà) */
+.mr-title {
+  color: #536ee7;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.mr-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mr-form .ant-form-item {
+  margin-bottom: 0;
+}
+
+/* Dải thông tin */
+.mr-info {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: #f6f7ff;
+  color: #3b4bcb;
+  font-size: 13px;
+}
+
+/* Khối điện / nước */
+.mr-block {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid #e3e6f2;
+  border-radius: 14px;
+}
+
+.mr-block__head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mr-block__head h3 {
+  margin: 0;
+  color: #151b3b;
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.mr-block__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+.mr-block__icon--elec {
+  background: #fff9e8;
+  color: #8a5a00;
+}
+.mr-block__icon--water {
+  background: #e8f6fb;
+  color: #0f5e6c;
+}
+
+.mr-block__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  align-items: start;
+}
+
+/* Trường nhập */
+.mr-fld {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.mr-form .ant-form-item-label {
+  padding: 0 0 4px;
+}
+
+.mr-form .ant-form-item-label > label {
+  height: auto;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.mr-lbl {
+  color: #151b3b;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.mr-lbl i {
+  margin-left: 2px;
+  color: #cf1322;
+  font-style: normal;
+}
+
+.mr-hint {
+  color: #7a82a6;
+  font-size: 11px;
+}
+
+.mr-note {
+  color: #7a82a6;
+  font-size: 11px;
+}
+
+.mr-note.is-ok {
+  color: #137a4b;
+}
+.mr-note.is-error {
+  color: #cf1322;
+}
+
+.mr-form .ant-form-item-explain,
+.mr-form .ant-form-item-extra {
+  min-height: 0;
+  margin-top: 4px;
+}
+
+.mr-readonly {
+  display: flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 0 11px;
+  border: 1px solid #d5daf0;
+  border-radius: 8px;
+  background: #f4f5fb;
+  color: #5b6385;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+
+.mr-form .ant-input,
+.mr-form .ant-input-number,
+.mr-form .ant-picker {
+  width: 100%;
+  min-height: 36px;
+  border-color: #d5daf0;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.mr-form .ant-input-number-input {
+  height: 34px;
+  font-variant-numeric: tabular-nums;
+}
+
+.mr-form .ant-input:focus,
+.mr-form .ant-input-focused,
+.mr-form .ant-input-number-focused,
+.mr-form .ant-picker-focused {
+  border-color: #536ee7;
+  box-shadow: 0 0 0 2px rgba(83, 110, 231, 0.2);
+}
+
+/* Dải tiêu thụ */
+.mr-use {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 13px;
+}
+
+.mr-use b {
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+
+.mr-use--elec {
+  background: #fff9e8;
+  color: #8a5a00;
+}
+.mr-use--water {
+  background: #e8f6fb;
+  color: #0f5e6c;
+}
+
+/* ===== Nút Hủy / Lưu: thon, bo tròn ===== */
+.mr-modal .ant-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.mr-modal .ant-modal-footer .ant-btn {
+  height: 36px;
+  min-width: 96px;
+  margin: 0;
+  padding: 0 22px;
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1;
+  box-shadow: none;
+  transition:
+    background 0.15s,
+    border-color 0.15s,
+    box-shadow 0.15s,
+    transform 0.1s;
+}
+
+.mr-modal .ant-modal-footer .ant-btn-default {
+  border-color: #d5daf0;
+  background: #fff;
+  color: #3a4268;
+}
+
+.mr-modal .ant-modal-footer .ant-btn-default:not(:disabled):hover {
+  border-color: #536ee7;
+  background: #f6f7ff;
+  color: #536ee7;
+}
+
+.mr-modal .ant-modal-footer .ant-btn-primary {
+  border: 0;
+  background: linear-gradient(135deg, #6a83f0, #536ee7);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(83, 110, 231, 0.3);
+}
+
+.mr-modal .ant-modal-footer .ant-btn-primary:not(:disabled):hover {
+  background: linear-gradient(135deg, #5f79ec, #4560df);
+  box-shadow: 0 6px 16px rgba(83, 110, 231, 0.38);
+}
+
+.mr-modal .ant-modal-footer .ant-btn:not(:disabled):active {
+  transform: translateY(1px);
+}
+
+/* ===== Màn hình nhỏ ===== */
+@media (max-width: 640px) {
+  .mr-modal .ant-modal-header {
+    padding: 14px 48px;
+  }
+  .mr-modal .ant-modal-close {
+    top: 12px;
+    right: 12px;
+  }
+  .mr-modal .ant-modal-body {
+    padding: 12px 16px 4px;
+  }
+  .mr-modal .ant-modal-footer {
+    padding: 8px 16px 16px;
+  }
+  .mr-block {
+    padding: 12px;
+  }
+  .mr-modal .ant-modal-footer .ant-btn {
+    flex: 1;
+  }
+}
+
+@media (max-width: 400px) {
+  .mr-block__grid {
+    grid-template-columns: 1fr;
+  }
+}

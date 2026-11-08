@@ -1,0 +1,258 @@
+/* =========================================================
+   Modal Thêm / Cập nhật dịch vụ (ServiceForm)
+   Tiền tố sf- để không đụng CSS của trang khác
+   ========================================================= */
+.sf-modal .ant-modal-content {
+  padding: 0;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.sf-modal .ant-modal-header {
+  margin: 0;
+  padding: 18px 24px;
+  background: linear-gradient(135deg, #f3f5ff 0%, #fff 100%);
+  border-bottom: 1px solid #eef0f6;
+}
+
+.sf-modal .ant-modal-body {
+  padding: 20px 24px 8px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.sf-modal .ant-modal-footer {
+  margin: 0;
+  padding: 14px 24px 18px;
+  border-top: 1px solid #f0f2f7;
+}
+
+/* ---------- Tiêu đề ---------- */
+.sf-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sf-title__icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  font-size: 18px;
+  color: #fff;
+  background: linear-gradient(135deg, #7c8cf2, #536ee7);
+  box-shadow: 0 6px 14px rgba(83, 110, 231, 0.3);
+}
+
+.sf-title__main {
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: #1f2a5a;
+}
+
+.sf-title__sub {
+  margin-top: 2px;
+  font-size: 12.5px;
+  font-weight: 400;
+  color: #8890b0;
+}
+
+/* ---------- Ô nhập: cao 40px, bo vừa ---------- */
+.sf-modal .ant-form-item {
+  margin-bottom: 16px;
+}
+
+.sf-modal .ant-form-item-label > label {
+  font-weight: 500;
+  color: #3b4263;
+}
+
+.sf-modal .ant-input,
+.sf-modal .ant-input-affix-wrapper,
+.sf-modal .ant-input-number,
+.sf-modal .ant-select-selector {
+  border-radius: 8px !important;
+}
+
+.sf-modal .ant-input:not(textarea),
+.sf-modal .ant-input-affix-wrapper:not(.ant-input-textarea-affix-wrapper),
+.sf-modal .ant-input-number {
+  min-height: 40px;
+}
+
+.sf-modal .ant-input-affix-wrapper > input.ant-input {
+  min-height: 0;
+}
+
+.sf-modal textarea.ant-input {
+  padding-block: 10px;
+}
+
+/* 38px + viền 2px = 40px (nếu để 40px ô sẽ thành 42px) */
+.sf-modal .ant-input-number-input {
+  height: 38px;
+}
+
+/* Ô đơn giá: đơn vị "đ" dính liền bên phải */
+.sf-modal .sf-money.ant-input-number-group-wrapper {
+  width: 100%;
+}
+
+.sf-modal .sf-money .ant-input-number-group-addon {
+  min-width: 40px;
+  border-color: #d9d9d9;
+  border-radius: 0 8px 8px 0 !important;
+  background: #f6f7fd;
+  font-weight: 700;
+  color: #3b4263;
+}
+
+.sf-modal .sf-money .ant-input-number-group .ant-input-number {
+  border-radius: 8px 0 0 8px !important;
+}
+
+.sf-modal .ant-select-single {
+  width: 100%;
+  height: 40px;
+}
+
+.sf-modal .ant-select-single .ant-select-selector {
+  align-items: center;
+  height: 40px !important;
+}
+
+.sf-modal .ant-select-single .ant-select-selection-search-input {
+  height: 40px !important;
+}
+
+/* ---------- Dòng bật tắt "Dịch vụ mặc định" ---------- */
+.sf-switch {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+  padding: 12px 16px;
+  border: 1px solid #eef0f6;
+  border-radius: 10px;
+  background: #f8f9fe;
+}
+
+.sf-switch__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.sf-switch__text b {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1f2a5a;
+}
+
+.sf-switch__text span {
+  font-size: 12.5px;
+  color: #8890b0;
+}
+
+/* ---------- Dịch vụ hệ thống (chỉ sửa giá) ---------- */
+.sf-lock {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+  padding: 12px 16px;
+  border: 1px solid #e3e7fa;
+  border-radius: 10px;
+  background: #f3f5ff;
+}
+
+.sf-lock__icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: #e4e8fd;
+  color: #536ee7;
+}
+
+.sf-lock__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.sf-lock__text b {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1f2a5a;
+  overflow-wrap: anywhere;
+}
+
+.sf-lock__text span {
+  font-size: 12.5px;
+  color: #8890b0;
+}
+
+.sf-hint {
+  margin-bottom: 16px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: #f3f5ff;
+  color: #5a6393;
+  font-size: 12.5px;
+  line-height: 1.6;
+}
+
+/* ---------- Chân modal ---------- */
+.sf-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  width: 100%;
+}
+
+.sf-footer.is-mobile {
+  flex-direction: column-reverse;
+}
+
+.sf-footer .ant-btn {
+  height: 40px;
+  padding-inline: 20px;
+  border-radius: 8px;
+}
+
+.sf-btn-primary.ant-btn-primary {
+  background: #536ee7;
+  box-shadow: 0 4px 12px rgba(83, 110, 231, 0.28);
+}
+
+.sf-btn-primary.ant-btn-primary:hover:not(:disabled) {
+  background: #4059d6;
+}
+
+@media (max-width: 575px) {
+  .sf-modal .ant-modal-header {
+    padding: 14px 16px;
+  }
+
+  .sf-modal .ant-modal-body {
+    padding: 16px 16px 4px;
+  }
+
+  .sf-modal .ant-modal-footer {
+    padding: 12px 16px 16px;
+  }
+
+  .sf-switch {
+    padding: 12px;
+  }
+}

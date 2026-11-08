@@ -1,0 +1,72 @@
+server:
+  port: 8080
+
+cors:
+  allowed-origins: ${CORS_ALLOWED_ORIGINS}
+  allowed-methods: GET,POST,PUT,DELETE,PATCH,OPTIONS
+  max-age: 3600
+
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:mysql://localhost:3306/trosmart_db}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc:
+          time_zone: Asia/Ho_Chi_Minh
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 50MB
+
+  redis:
+    host: localhost
+    port: 6379
+    timeout: 60000
+
+jwt:
+  signerKey: ${JWT_SIGNER_KEY}
+  access-token-expiration: 3600
+  refresh-token-expiration: 604800
+
+cloudinary:
+  cloud_name: ${CLOUDINARY_CLOUD_NAME}
+  api_key: ${CLOUDINARY_API_KEY}
+  api_secret: ${CLOUDINARY_API_SECRET}
+
+# ===== Chống spam cho form liên hệ =====
+app:
+  antispam:
+    # true khi chạy sau Nginx (docker): lấy IP khách từ X-Forwarded-For do Nginx ghi đè.
+    # false khi chạy trực tiếp (dev): lấy IP kết nối thật.
+    trust-forward-header: ${TRUST_FORWARD_HEADER:false}
+  contact:
+    ip-limit-per-hour: 5
+    daily-cap: 300
+  captcha:
+    enabled: ${CAPTCHA_ENABLED:false}
+    secret: ${TURNSTILE_SECRET:}
+
+  contract:
+    landlord:
+      full-name: Lê Đăng Thành
+      birth-date: 22/06/2002
+      identity-number: "2206200202061965"
+      identity-issued-date: 01/01/2021
+      identity-issued-place: Bộ công an
+      phone: "0369 958 572"
+      address: Số 1, đường ABC, phường XYZ, Hà Nội
+  invoice:
+    bank:
+      name: VietTinBank
+      account-number: "0369958572"
+      account-holder: LE DANG THANH

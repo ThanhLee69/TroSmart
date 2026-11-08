@@ -1,0 +1,1087 @@
+/* =====================================================================
+   TRANG CHỦ
+   Gồm: nền chung, tiêu đề phần, loại phòng, thuê thế nào,
+   cổng người thuê, liên hệ. Banner và phòng trống có CSS riêng.
+   ===================================================================== */
+
+/* Nền giống các trang công khai khác (Tìm phòng...) */
+.home-page {
+  width: 100%;
+  background:
+    radial-gradient(
+      900px 340px at 85% -80px,
+      #e6eaff 0%,
+      rgba(230, 234, 255, 0) 70%
+    ),
+    #f6f7fc;
+  color: #151b3b;
+}
+
+.home-page *,
+.home-page *::before,
+.home-page *::after {
+  box-sizing: border-box;
+}
+
+.hp-container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.hp-section {
+  padding: 28px 0 16px;
+}
+
+/* Phần nối tiếp ngay sau phần có sẵn khoảng đệm phía dưới */
+.hp-section--flush {
+  padding: 8px 0 24px;
+}
+
+.hp-section--last {
+  padding: 8px 0 56px;
+}
+
+/* ---------- Tiêu đề phần ---------- */
+.hp-head {
+  margin-bottom: 20px;
+}
+
+.hp-title.ant-typography {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 6px;
+  color: #151b3b;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+/* Vạch xanh trước tiêu đề */
+.hp-title.ant-typography::before {
+  content: "";
+  flex: none;
+  width: 4px;
+  height: 22px;
+  border-radius: 3px;
+  background: linear-gradient(180deg, #6b82f2, #4a5be0);
+}
+
+.hp-subtitle.ant-typography {
+  margin: 0;
+  color: #5b6385;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Nút chính dùng chung */
+.hp-btn-primary.ant-btn.ant-btn-primary {
+  height: 42px;
+  padding: 0 24px;
+  border: 0;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #4a5be0, #1e3390);
+  font-weight: 700;
+  box-shadow: 0 14px 24px -14px rgba(30, 51, 144, 0.7);
+}
+
+.hp-btn-primary.ant-btn.ant-btn-primary:hover {
+  background: linear-gradient(135deg, #4a5be0, #1e3390);
+  filter: brightness(1.1);
+}
+
+/* =====================================================================
+   1. LOẠI PHÒNG
+   ===================================================================== */
+.room-type-list > .ant-col {
+  display: flex;
+}
+
+.room-type-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid #e3e6f2;
+  border-radius: 18px;
+  background: #fff;
+  cursor: pointer;
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.room-type-card:hover {
+  border-color: #c9d1f7;
+  box-shadow: 0 20px 38px -22px rgba(59, 75, 203, 0.45);
+  transform: translateY(-4px);
+}
+
+.room-type-card:focus-visible {
+  outline: 2px solid #536ee7;
+  outline-offset: 3px;
+}
+
+.room-type-card__image-wrapper {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #eef1ff;
+}
+
+/* Lớp tối nhẹ ở đáy ảnh, đậm hơn khi rê chuột */
+.room-type-card__image-wrapper::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(21, 27, 59, 0) 55%,
+    rgba(21, 27, 59, 0.28) 100%
+  );
+  opacity: 0.6;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+
+.room-type-card:hover .room-type-card__image-wrapper::after {
+  opacity: 1;
+}
+
+.room-type-card__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.room-type-card:hover .room-type-card__image {
+  transform: scale(1.06);
+}
+
+.room-type-card__content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 16px 18px 18px;
+}
+
+.room-type-card__name.ant-typography {
+  margin: 0 0 6px;
+  color: #151b3b;
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.35;
+  transition: color 0.2s;
+}
+
+.room-type-card:hover .room-type-card__name.ant-typography {
+  color: #4a5be0;
+}
+
+.room-type-card__description.ant-typography {
+  flex: 1;
+  margin: 0 0 14px;
+  color: #5b6385;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.room-type-card__link {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 8px;
+  color: #4a5be0;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.room-type-card__link .ant-typography {
+  color: inherit;
+  font-weight: inherit;
+}
+
+.room-type-card__link .anticon {
+  transition: transform 0.2s ease;
+}
+
+.room-type-card:hover .room-type-card__link .anticon {
+  transform: translateX(4px);
+}
+
+/* =====================================================================
+   HIỆN DẦN KHI CUỘN
+   ===================================================================== */
+.hp-reveal {
+  opacity: 0;
+  translate: 0 20px;
+  transition:
+    opacity 0.6s ease var(--delay, 0ms),
+    translate 0.6s ease var(--delay, 0ms),
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.hp-reveal.is-shown {
+  opacity: 1;
+  translate: 0 0;
+}
+
+/* =====================================================================
+   2. QUY TRÌNH THUÊ PHÒNG
+   ===================================================================== */
+.hp-flow {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hp-flow__item {
+  position: relative;
+  padding: 22px 20px 22px;
+  border: 1px solid #e3e6f2;
+  border-radius: 18px;
+  background: #fff;
+}
+
+.hp-flow__item:hover {
+  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--to) 40%, #e3e6f2);
+  box-shadow: 0 22px 36px -24px color-mix(in srgb, var(--to) 55%, transparent);
+}
+
+/* Đường nét đứt nối sang bước kế tiếp */
+.hp-flow__item:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 46px;
+  left: 100%;
+  width: 18px;
+  border-top: 2px dashed #c9d1f5;
+}
+
+.hp-flow__step {
+  position: absolute;
+  top: 20px;
+  right: 18px;
+  color: #a0a8c2;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.hp-flow__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  margin-bottom: 16px;
+  border-radius: 15px;
+  background: linear-gradient(135deg, var(--from), var(--to));
+  box-shadow: 0 12px 20px -10px var(--to);
+  color: #fff;
+  font-size: 22px;
+  transition: transform 0.25s ease;
+}
+
+.hp-flow__item:hover .hp-flow__icon {
+  transform: rotate(-6deg) scale(1.06);
+}
+
+.hp-flow__title {
+  margin: 0 0 6px;
+  color: #151b3b;
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.hp-flow__desc {
+  margin: 0;
+  color: #5b6385;
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+/* =====================================================================
+   3. VÌ SAO CHỌN TROSMART (lưới bento)
+   ===================================================================== */
+.hp-bento {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr 1fr;
+  gap: 18px;
+}
+
+.hp-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  overflow: hidden;
+  border: 1px solid #e3e6f2;
+  border-radius: 20px;
+  background: #fff;
+}
+
+.hp-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 22px 36px -26px rgba(47, 65, 182, 0.5);
+}
+
+.hp-card--feature {
+  grid-row: 1 / 3;
+  border: 0;
+  background:
+    radial-gradient(
+      circle at 85% 8%,
+      rgba(139, 160, 255, 0.45),
+      transparent 45%
+    ),
+    linear-gradient(160deg, #1c2766 0%, #3347c9 100%);
+  color: #fff;
+}
+
+.hp-card--wide {
+  grid-column: 2 / 4;
+}
+
+.hp-card__badge {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 18px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+  font-size: 12.5px;
+  font-weight: 700;
+}
+
+.hp-card__title {
+  margin: 0 0 8px;
+  color: #fff;
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.hp-card__title--dark {
+  color: #151b3b;
+  font-size: 18px;
+}
+
+.hp-card__desc {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 14.5px;
+  line-height: 1.7;
+}
+
+.hp-card__desc--dark {
+  color: #5b6385;
+  font-size: 14px;
+}
+
+.hp-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  margin-bottom: 14px;
+  border-radius: 12px;
+  font-size: 19px;
+}
+
+.hp-card__icon--blue {
+  background: #eef0fd;
+  color: #4a5be0;
+}
+
+.hp-card__icon--teal {
+  background: #e3f7f1;
+  color: #159f83;
+}
+
+.hp-card__icon--amber {
+  background: #fff1dc;
+  color: #d9801c;
+}
+
+/* Minh họa: danh sách phòng */
+.hp-rooms {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 26px;
+}
+
+.hp-rooms__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.hp-rooms__row.is-on {
+  border-color: transparent;
+  background: #fff;
+  color: #151b3b;
+  box-shadow: 0 14px 24px -14px rgba(0, 0, 0, 0.5);
+}
+
+.hp-pill {
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.hp-pill--ok {
+  background: #dff7ea;
+  color: #12804f;
+}
+
+.hp-sample {
+  align-self: flex-end;
+  margin-top: 2px;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 12px;
+}
+
+/* Minh họa: kết quả tìm gần */
+.hp-near {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 18px;
+}
+
+.hp-near__row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 14px;
+  border: 1px solid #dfe4fb;
+  border-radius: 14px;
+  background: #f4f6ff;
+}
+
+.hp-near__dist {
+  align-self: flex-start;
+  padding: 2px 9px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #6b82f2, #4a5be0);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.hp-near__name {
+  color: #5b6385;
+  font-size: 13px;
+}
+
+.hp-near__row strong {
+  color: #151b3b;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+/* Minh họa: cơ cấu hóa đơn */
+.hp-split {
+  margin-top: auto;
+  padding-top: 18px;
+}
+
+.hp-split__bar {
+  display: flex;
+  height: 12px;
+  gap: 3px;
+}
+
+.hp-split__bar i {
+  display: block;
+  height: 100%;
+  min-width: 6px;
+  border-radius: 999px;
+}
+
+.hp-split__legend {
+  display: flex;
+  gap: 14px;
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+  color: #5b6385;
+  font-size: 12.5px;
+}
+
+.hp-split__legend b {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 5px;
+  border-radius: 50%;
+}
+
+/* Minh họa: tiến độ sửa chữa */
+.hp-progress {
+  display: flex;
+  margin: auto 0 0;
+  padding: 18px 0 0;
+  list-style: none;
+}
+
+.hp-progress li {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: #8a93ad;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.hp-progress li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: calc(50% + 10px);
+  width: calc(100% - 20px);
+  height: 2px;
+  background: #e3e6f2;
+}
+
+.hp-progress li.is-done:not(:last-child)::after {
+  background: #4a5be0;
+}
+
+.hp-progress b {
+  position: relative;
+  z-index: 1;
+  width: 14px;
+  height: 14px;
+  border: 2px solid #d5daf0;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.hp-progress .is-done b {
+  border-color: #4a5be0;
+  background: #4a5be0;
+}
+
+.hp-progress .is-done,
+.hp-progress .is-now {
+  color: #2c3560;
+}
+
+.hp-progress .is-now b {
+  border-color: #f0a23a;
+  background: #f0a23a;
+  animation: hp-pulse 1.8s ease-out infinite;
+}
+
+@keyframes hp-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(240, 162, 58, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 0 10px rgba(240, 162, 58, 0);
+  }
+}
+
+/* =====================================================================
+   4. DÀNH CHO NGƯỜI ĐANG THUÊ
+   ===================================================================== */
+.hp-tenant {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 40px;
+  overflow: hidden;
+  padding: 44px 44px;
+  border: 1px solid #e3e6f2;
+  border-radius: 26px;
+  background:
+    radial-gradient(
+      circle at 100% 0%,
+      rgba(107, 130, 242, 0.22),
+      transparent 42%
+    ),
+    radial-gradient(
+      circle at 0% 100%,
+      rgba(63, 198, 165, 0.16),
+      transparent 40%
+    ),
+    #f4f6ff;
+}
+
+.hp-kicker {
+  display: inline-block;
+  margin-bottom: 14px;
+  padding: 5px 13px;
+  border-radius: 999px;
+  background: #fff;
+  color: #3b4bcb;
+  font-size: 12.5px;
+  font-weight: 700;
+  box-shadow: 0 6px 14px -8px rgba(74, 91, 224, 0.5);
+}
+
+.hp-tenant__title.ant-typography {
+  margin: 0 0 10px;
+  color: #151b3b;
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.hp-tenant__desc.ant-typography {
+  max-width: 500px;
+  margin: 0 0 20px;
+  color: #5b6385;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.hp-tfeat {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 0 0 24px;
+  padding: 0;
+  list-style: none;
+}
+
+.hp-tfeat li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid #e3e6f2;
+  border-radius: 14px;
+  background: #fff;
+  color: #2c3560;
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.hp-tfeat__icon {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  background: #eef0fd;
+  color: #4a5be0;
+  font-size: 15px;
+}
+
+/* Sân khấu chứa hóa đơn và các thẻ nổi */
+.hp-stage {
+  position: relative;
+  padding: 26px 0;
+}
+
+.hp-float {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 18px 32px -16px rgba(29, 47, 91, 0.45);
+  animation: hp-float 6s ease-in-out infinite;
+}
+
+.hp-float--chip {
+  top: 0;
+  right: 0;
+  padding: 8px 14px;
+  color: #12804f;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.hp-float--toast {
+  bottom: 0;
+  left: -8px;
+  padding: 10px 14px 10px 10px;
+  color: #5b6385;
+  font-size: 12.5px;
+  animation-delay: -3s;
+}
+
+.hp-float--toast b {
+  display: block;
+  color: #151b3b;
+  font-size: 13px;
+}
+
+.hp-float__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: #fff1dc;
+  color: #d9801c;
+  font-size: 16px;
+}
+
+@keyframes hp-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* Hóa đơn minh họa */
+.hp-invoice {
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto;
+  padding: 22px;
+  border: 1px solid #e3e6f2;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 26px 48px -30px rgba(29, 47, 91, 0.45);
+}
+
+.hp-invoice__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.hp-invoice__label {
+  display: block;
+  color: #8a93ad;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.hp-invoice__month {
+  display: block;
+  margin: 4px 0 2px;
+  color: #151b3b;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.hp-invoice__room {
+  color: #5b6385;
+  font-size: 13px;
+}
+
+.hp-invoice__icon {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 11px;
+  background: #eef0fd;
+  color: #4a5be0;
+  font-size: 19px;
+}
+
+.hp-invoice__status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 16px 0 6px;
+  padding-bottom: 14px;
+  border-bottom: 1px dashed #dfe4fb;
+}
+
+.hp-invoice__status .ant-tag {
+  margin: 0;
+  border-radius: 6px;
+}
+
+.hp-invoice__sample {
+  color: #a0a8c2;
+  font-size: 12px;
+}
+
+.hp-invoice__rows {
+  margin: 0;
+  padding: 8px 0 6px;
+}
+
+.hp-invoice__rows > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 7px 0;
+}
+
+.hp-invoice__rows dt {
+  color: #5b6385;
+  font-size: 14px;
+}
+
+.hp-invoice__rows dd {
+  margin: 0;
+  color: #151b3b;
+  font-size: 14px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.hp-invoice__total {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 14px;
+  border-top: 1px dashed #dfe4fb;
+  color: #2c3560;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.hp-invoice__total strong {
+  color: #3b4bcb;
+  font-size: 24px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+/* =====================================================================
+   5. LIÊN HỆ
+   ===================================================================== */
+.hp-cta {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  overflow: hidden;
+  padding: 36px 40px;
+  border-radius: 22px;
+  background: linear-gradient(120deg, #2f41b6 0%, #536ee7 100%);
+  color: #fff;
+}
+
+/* Một vòng tròn mờ làm điểm nhấn */
+.hp-cta::after {
+  content: "";
+  position: absolute;
+  right: -90px;
+  bottom: -150px;
+  width: 320px;
+  height: 320px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.hp-cta__text,
+.hp-cta__actions {
+  position: relative;
+  z-index: 1;
+}
+
+.hp-cta__title.ant-typography {
+  margin: 0 0 8px;
+  color: #fff;
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.hp-cta__desc.ant-typography {
+  max-width: 620px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 14.5px;
+  line-height: 1.7;
+}
+
+.hp-cta__actions {
+  display: flex;
+  flex: none;
+  gap: 12px;
+}
+
+.hp-cta__btn.ant-btn {
+  height: 44px;
+  padding: 0 22px;
+  border-radius: 10px;
+  font-weight: 700;
+  box-shadow: none;
+}
+
+.hp-cta__btn--light.ant-btn {
+  border: 1px solid #fff;
+  background: #fff;
+  color: #2f41b6;
+}
+
+.hp-cta__btn--light.ant-btn:hover {
+  border-color: #eef0ff !important;
+  background: #eef0ff !important;
+  color: #2f41b6 !important;
+}
+
+.hp-cta__btn--outline.ant-btn {
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  background: transparent;
+  color: #fff;
+}
+
+.hp-cta__btn--outline.ant-btn:hover {
+  border-color: #fff !important;
+  background: rgba(255, 255, 255, 0.14) !important;
+  color: #fff !important;
+}
+
+/* =====================================================================
+   RESPONSIVE
+   ===================================================================== */
+@media (max-width: 1199px) {
+  .hp-tenant {
+    padding: 36px 30px;
+    gap: 28px;
+  }
+}
+
+@media (max-width: 991px) {
+  .hp-section {
+    padding-top: 24px;
+  }
+
+  .hp-flow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hp-flow__item:not(:last-child)::after {
+    display: none;
+  }
+
+  .hp-bento {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .hp-card--feature {
+    grid-row: auto;
+    grid-column: 1 / 3;
+  }
+
+  .hp-card--wide {
+    grid-column: 1 / 3;
+  }
+
+  .hp-tenant {
+    grid-template-columns: 1fr;
+  }
+
+  .hp-cta {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 30px 26px;
+  }
+}
+
+@media (max-width: 575px) {
+  .hp-flow,
+  .hp-bento {
+    grid-template-columns: 1fr;
+  }
+
+  .hp-card--feature,
+  .hp-card--wide {
+    grid-column: auto;
+  }
+
+  .hp-near {
+    grid-template-columns: 1fr;
+  }
+
+  .hp-tenant {
+    padding: 26px 18px;
+  }
+
+  .hp-tenant__title.ant-typography {
+    font-size: 23px;
+  }
+
+  .hp-tfeat {
+    grid-template-columns: 1fr;
+  }
+
+  .hp-float--toast {
+    left: 0;
+  }
+
+  .hp-cta__title.ant-typography {
+    font-size: 22px;
+  }
+
+  .hp-cta__actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .hp-cta__btn.ant-btn {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hp-reveal,
+  .hp-reveal.is-shown {
+    opacity: 1;
+    translate: none;
+    transition: none;
+  }
+
+  .hp-float,
+  .hp-progress .is-now b {
+    animation: none;
+  }
+}
