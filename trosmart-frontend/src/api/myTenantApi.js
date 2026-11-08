@@ -76,3 +76,8 @@ export const getMyProfile = async () =>
 
 export const changeMyPassword = async (payload) =>
   (await axiosClient.put(`${ME}/password`, payload)).data.result;
+
+// Tạo link thanh toán VNPay cho phần còn nợ của hóa đơn, trả về URL để chuyển trang
+export const createVnpayPayment = async (invoiceId) =>
+  (await axiosClient.post(`${API_CONFIG.VNPAY}/vnpay/create/${invoiceId}`))
+    .data.result;

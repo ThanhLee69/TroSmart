@@ -14,6 +14,7 @@ export const OPEN_STATUSES = ["UNPAID", "PARTIALLY_PAID", "OVERDUE"];
 export const PAYMENT_METHOD_LABEL = {
   CASH: "Tiền mặt",
   BANK_TRANSFER: "Chuyển khoản",
+  VNPAY: "VNPay",
 };
 
 const FALLBACK = { bg: "#f1f2f7", c: "#5b6385" };

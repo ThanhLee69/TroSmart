@@ -1,4 +1,5 @@
 import jsQR from "jsqr";
+import { readBarcodes } from "zxing-wasm/reader";
 import {
   BinaryBitmap,
   DecodeHintType,
@@ -372,6 +373,23 @@ const buildRegions = (width, height) => {
 
 const nextFrame = () => new Promise((resolve) => setTimeout(resolve, 0));
 
+// Trên CCCD gắn chip, mã QR nằm ở góc TRÊN BÊN PHẢI mặt trước. Thử các vùng
+// ở góc đó trước (tính theo tỉ lệ ảnh), nên thường đọc được ngay lượt đầu.
+const buildPriorityRegions = (width, height) =>
+  [
+    { x: 0.5, y: 0, w: 0.5, h: 0.55 },
+    { x: 0.6, y: 0, w: 0.4, h: 0.45 },
+    { x: 0.55, y: 0.02, w: 0.4, h: 0.4 },
+    { x: 0.65, y: 0, w: 0.35, h: 0.35 },
+    { x: 0.4, y: 0, w: 0.6, h: 0.65 },
+  ].map(({ x, y, w, h }) => ({
+    sx: Math.round(width * x),
+    sy: Math.round(height * y),
+    sw: Math.round(width * w),
+    sh: Math.round(height * h),
+    label: `góc trên phải (${x},${y},${w}x${h})`,
+  }));
+
 // Các lượt thử, từ rẻ đến đắt. Mỗi lượt quét hết các vùng rồi mới sang lượt
 // sau, nên ảnh dễ đọc được xử lý rất nhanh và chỉ ảnh khó mới phải chạy đủ.
 // Chữ "whole" là vùng toàn ảnh, "crop" là các ô cắt.
@@ -383,11 +401,8 @@ const PASSES = [
   { name: "đen trắng", pipeline: "binary", smooth: true, thorough: true, whole: [1], crop: [900, 1400] },
 ];
 
-const decodeOnCanvases = async (image) => {
-  const regions = buildRegions(image.width, image.height);
-  const startedAt = performance.now();
-  let attempts = 0;
-
+// Quét một nhóm vùng qua lần lượt các lượt thử
+const scanRegions = async (image, regions, state) => {
   for (const pass of PASSES) {
     for (const region of regions) {
       const isWhole = region.label === "toàn ảnh";
@@ -399,7 +414,7 @@ const decodeOnCanvases = async (image) => {
       );
 
       for (const longSide of sizes) {
-        attempts += 1;
+        state.attempts += 1;
 
         let text = null;
 
@@ -413,7 +428,7 @@ const decodeOnCanvases = async (image) => {
           return {
             text,
             log: [
-              `ĐỌC ĐƯỢC ở lượt "${pass.name}", ${region.label}, cỡ ${longSide}px (lần thử ${attempts}, ${Math.round(performance.now() - startedAt)} ms)`,
+              `ĐỌC ĐƯỢC ở lượt "${pass.name}", ${region.label}, cỡ ${longSide}px (lần thử ${state.attempts}, ${Math.round(performance.now() - state.startedAt)} ms)`,
             ],
           };
         }
@@ -424,7 +439,91 @@ const decodeOnCanvases = async (image) => {
     }
   }
 
-  return { text: null, log: [`Không thấy mã QR sau ${attempts} lần thử`] };
+  return null;
+};
+
+const decodeOnCanvases = async (image) => {
+  const state = { attempts: 0, startedAt: performance.now() };
+
+  // Bước 1: chỉ góc trên phải (nơi có mã QR)
+  const corner = await scanRegions(
+    image,
+    buildPriorityRegions(image.width, image.height),
+    state,
+  );
+
+  if (corner) return corner;
+
+  // Bước 2: ảnh chụp lệch/xoay, quét toàn bộ như trước
+  const all = await scanRegions(
+    image,
+    buildRegions(image.width, image.height),
+    state,
+  );
+
+  return (
+    all || {
+      text: null,
+      log: [`Không thấy mã QR sau ${state.attempts} lần thử`],
+    }
+  );
+};
+
+const WASM_OPTIONS = {
+  formats: ["QRCode"],
+  tryHarder: true,
+  tryRotate: true,
+  tryInvert: true,
+  tryDownscale: true,
+  maxNumberOfSymbols: 1,
+};
+
+// Ưu tiên đọc từ byte thô theo UTF-8 để giữ đúng tiếng Việt có dấu
+const wasmTextOf = (result) =>
+  result.bytes?.length
+    ? new TextDecoder("utf-8").decode(result.bytes)
+    : result.text;
+
+const pickWasmHit = (results) =>
+  results.find((r) => r.isValid !== false && (r.bytes?.length || r.text));
+
+const decodeWithWasm = async (file, image) => {
+  try {
+    let hit = pickWasmHit(await readBarcodes(file, WASM_OPTIONS));
+
+    if (hit) {
+      console.info("zxing-wasm: ĐỌC ĐƯỢC ở ảnh gốc");
+      return wasmTextOf(hit);
+    }
+
+    // Ảnh nhỏ thì phóng gấp đôi rồi đọc lại
+    const factor = image.width < 1400 ? 2 : 1;
+    const canvas = document.createElement("canvas");
+    canvas.width = image.width * factor;
+    canvas.height = image.height * factor;
+
+    const context = canvas.getContext("2d", { willReadFrequently: true });
+    context.imageSmoothingQuality = "high";
+    context.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+    hit = pickWasmHit(
+      await readBarcodes(
+        context.getImageData(0, 0, canvas.width, canvas.height),
+        WASM_OPTIONS,
+      ),
+    );
+
+    if (hit) {
+      console.info(`zxing-wasm: ĐỌC ĐƯỢC sau khi phóng x${factor}`);
+      return wasmTextOf(hit);
+    }
+
+    console.info("zxing-wasm: không thấy mã QR");
+  } catch (error) {
+    console.warn("zxing-wasm lỗi, chuyển sang bộ đọc JavaScript:", error);
+  }
+
+  return null;
 };
 
 // Trả về chuỗi trong mã QR, hoặc null nếu ảnh không có mã đọc được.
@@ -448,6 +547,9 @@ export const readQrFromImageFile = async (file) => {
     );
 
     if (native) return native;
+
+    const wasmText = await decodeWithWasm(file, image);
+    if (wasmText) return wasmText;
 
     const { text, log } = await decodeOnCanvases(image);
     log.forEach((line) => console.info(line));

@@ -243,6 +243,7 @@ public class InvoicePdfDataFactory {
         return switch (method) {
             case CASH -> "Tiền mặt";
             case BANK_TRANSFER -> "Chuyển khoản";
+            case VNPAY -> "Thanh toán online qua VNPay";
         };
     }
 

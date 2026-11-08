@@ -70,3 +70,11 @@ app:
       name: VietTinBank
       account-number: "0369958572"
       account-holder: LE DANG THANH
+  vnpay:
+    tmn-code: C0MG7OXI
+    hash-secret: CCUSDKHHEOHHMHJDFQRPEKTFTROMGOQD
+    pay-url: https://sandbox.vnpayment.vn/paymentv2/vpcpay.html
+    # Trình duyệt người dùng quay về địa chỉ này (BE). Chạy local dùng localhost là được
+    return-url: ${VNPAY_RETURN_URL:http://localhost:8080/api/v1/payment/vnpay-return}
+    # Sau khi BE xử lý xong sẽ đưa người dùng về trang chi tiết hóa đơn ở FE. Sửa cho đúng route của mày
+    frontend-invoice-url: ${VNPAY_FRONTEND_INVOICE_URL:http://localhost:3000/khach-thue/hoa-don/{id}}

@@ -22,6 +22,7 @@ const API_CONFIG = {
   PUBLIC: "/public",
   TENANT_ME:"/tenant",
   CONTACT: "/contacts",
+  VNPAY: "/payment",
 };
 
 export default API_CONFIG;

@@ -138,6 +138,18 @@ const PAYMENT_METHODS = [
   },
 ];
 
+// Chỉ để hiển thị lịch sử: gồm cả VNPay (khách tự thanh toán online).
+// Form ghi nhận thanh toán của chủ trọ vẫn chỉ dùng PAYMENT_METHODS ở trên.
+const HISTORY_METHODS = [
+  ...PAYMENT_METHODS,
+  {
+    value: "VNPAY",
+    label: "VNPay",
+    icon: <CreditCardOutlined />,
+    color: { background: "#e8f2ff", color: "#005baa" },
+  },
+];
+
 // Tiền hiển thị kiểu 100,000đ (dấu phẩy ngăn cách hàng nghìn)
 const formatMoney = (value) =>
   `${Number(value || 0).toLocaleString("en-US", { maximumFractionDigits: 0 })}đ`;
@@ -631,10 +643,11 @@ const InvoiceDetail = () => {
               </div>
 
               {payments.map((payment) => {
-                const isBank = payment.paymentMethod === "BANK_TRANSFER";
-                const method = PAYMENT_METHODS.find(
+                const method = HISTORY_METHODS.find(
                   (item) => item.value === payment.paymentMethod,
                 );
+                // Khoản VNPay do hệ thống ghi nhận, chủ trọ không xóa tay
+                const isOnline = payment.paymentMethod === "VNPAY";
 
                 const subParts = [];
                 if (payment.transactionCode) {
@@ -646,17 +659,27 @@ const InvoiceDetail = () => {
                   <div className="invd-item" key={payment.id}>
                     <span
                       className="invd-tile"
-                      style={(method || PAYMENT_METHODS[0]).color}
+                      style={(method || HISTORY_METHODS[0]).color}
                     >
-                      {isBank ? <BankOutlined /> : <DollarOutlined />}
+                      {method?.icon ?? <DollarOutlined />}
                     </span>
 
                     <div className="invd-item__main">
-                      <div className="invd-item__name">
-                        <b>
-                          {method?.label ?? "Khác"} ·{" "}
+                      <div className="invd-item__name invd-pay-head">
+                        <span
+                          className="invd-chip invd-chip--method"
+                          style={
+                            method?.color ?? {
+                              background: "#f1f3fb",
+                              color: "#5b6385",
+                            }
+                          }
+                        >
+                          {method?.label ?? "Khác"}
+                        </span>
+                        <span className="invd-pay-date">
                           {formatDateTime(payment.paymentDate)}
-                        </b>
+                        </span>
                       </div>
                       {subParts.length > 0 && (
                         <span className="invd-item__sub">
@@ -669,7 +692,7 @@ const InvoiceDetail = () => {
                       + {formatMoney(payment.amount)}
                     </b>
 
-                    {!isCancelled && (
+                    {!isCancelled && !isOnline && (
                       <Popconfirm
                         title="Xóa khoản thanh toán này?"
                         description="Dùng khi ghi nhận nhầm. Số tiền còn lại sẽ được tính lại."

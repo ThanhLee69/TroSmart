@@ -1,8 +1,12 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "antd";
-import { useNavigate, useParams } from "react-router-dom";
-import { ArrowLeftOutlined, CopyOutlined } from "@ant-design/icons";
-import { getMyInvoiceDetail } from "../../api/myTenantApi";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import {
+  ArrowLeftOutlined,
+  CopyOutlined,
+  CreditCardOutlined,
+} from "@ant-design/icons";
+import { createVnpayPayment, getMyInvoiceDetail } from "../../api/myTenantApi";
 import { tenant_path_name } from "../../constants/path_name";
 import { useNotify } from "../../components/NotificationProvider";
 import { AsyncBlock, formatDate, formatMoney, useLoad } from "./tenantUi";
@@ -61,9 +65,67 @@ export default function TenantInvoiceDetail() {
   const { id } = useParams();
   const { notify, contextHolder } = useNotify();
   const [qrFailed, setQrFailed] = useState(false);
+  const [paying, setPaying] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const invoice = useLoad(() => getMyInvoiceDetail(id), [id]);
   const v = invoice.data;
+
+  // VNPay đưa người dùng quay về kèm ?payment=success|failed|invalid
+  const paymentResult = searchParams.get("payment");
+
+  // Nhớ kết quả đã báo: React StrictMode (chạy dev) chạy effect 2 lần khi mở trang
+  // nên không có chốt này thì thông báo hiện hai lần.
+  const handledResult = useRef(null);
+
+  useEffect(() => {
+    if (!paymentResult) {
+      handledResult.current = null;
+      return;
+    }
+
+    if (handledResult.current === paymentResult) return;
+    handledResult.current = paymentResult;
+
+    if (paymentResult === "success") {
+      notify({
+        type: "success",
+        message: "Thanh toán thành công",
+        description: "Hóa đơn đã được cập nhật.",
+      });
+      invoice.reload();
+    } else {
+      notify({
+        type: "error",
+        message:
+          paymentResult === "invalid"
+            ? "Không xác thực được kết quả thanh toán"
+            : "Thanh toán chưa hoàn tất",
+        description: "Chưa có khoản tiền nào bị ghi nhận. Bạn có thể thử lại.",
+      });
+    }
+
+    // Xóa tham số khỏi địa chỉ để tải lại trang không báo lần nữa
+    setSearchParams({}, { replace: true });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [paymentResult]);
+
+  // Lấy link thanh toán từ backend rồi chuyển sang cổng VNPay
+  const payWithVnpay = async () => {
+    setPaying(true);
+
+    try {
+      const url = await createVnpayPayment(id);
+      window.location.href = url;
+    } catch (error) {
+      setPaying(false);
+      notify({
+        type: "error",
+        message: "Không tạo được thanh toán",
+        description: error?.response?.data?.message ?? "Vui lòng thử lại sau.",
+      });
+    }
+  };
 
   const backToList = () => navigate(tenant_path_name.invoice);
 
@@ -267,6 +329,20 @@ export default function TenantInvoiceDetail() {
                       {formatMoney(remaining)}
                     </b>
                   </div>
+
+                  {showQr && (
+                    <Button
+                      type="primary"
+                      block
+                      size="large"
+                      icon={<CreditCardOutlined />}
+                      loading={paying}
+                      onClick={payWithVnpay}
+                      style={{ marginTop: 14 }}
+                    >
+                      Thanh toán qua VNPay
+                    </Button>
+                  )}
 
                   {isOpen(v) && (
                     <p className="tv-hint">

@@ -33,6 +33,9 @@ import {
   DownOutlined,
   SlackOutlined,
   DownloadOutlined,
+  CheckCircleOutlined,
+  DollarOutlined,
+  HomeOutlined,
 } from "@ant-design/icons";
 import { useNavigate, useParams } from "react-router-dom";
 import dayjs from "dayjs";
@@ -77,6 +80,77 @@ const PAYMENT_CYCLE_LABEL = {
   HALF_YEARLY: "6 tháng",
   YEARLY: "Hàng năm",
 };
+
+// Lý do chấm dứt: chọn sẵn, không nhập tay. Nội dung nhãn được lưu làm lý do.
+const TERMINATE_REASONS = [
+  {
+    value: "Khách chuyển đi trước hạn",
+    hint: "Khách chủ động báo trả phòng",
+    icon: <LogoutOutlined />,
+    tone: "blue",
+  },
+  {
+    value: "Hết hạn, không gia hạn",
+    hint: "Hai bên không tiếp tục thuê",
+    icon: <CalendarOutlined />,
+    tone: "green",
+  },
+  {
+    value: "Hai bên thỏa thuận chấm dứt",
+    hint: "Thống nhất kết thúc sớm",
+    icon: <CheckCircleOutlined />,
+    tone: "purple",
+  },
+  {
+    value: "Khách chậm đóng tiền nhiều lần",
+    hint: "Nợ tiền phòng, dịch vụ",
+    icon: <DollarOutlined />,
+    tone: "orange",
+  },
+  {
+    value: "Khách vi phạm nội quy",
+    hint: "Vi phạm điều đã cam kết",
+    icon: <WarningOutlined />,
+    tone: "red",
+  },
+  {
+    value: "Chủ trọ thu hồi phòng",
+    hint: "Sửa chữa, bán hoặc dùng việc khác",
+    icon: <HomeOutlined />,
+    tone: "gray",
+  },
+  {
+    value: "Lý do khác",
+    hint: "Không thuộc các mục trên",
+    icon: <InfoCircleOutlined />,
+    tone: "gray",
+  },
+];
+
+// Danh sách thẻ chọn một lý do, dùng được trong Form.Item
+const ReasonPicker = ({ value, onChange }) => (
+  <div className="cd-reasons" role="radiogroup" aria-label="Lý do chấm dứt">
+    {TERMINATE_REASONS.map((item) => (
+      <button
+        key={item.value}
+        type="button"
+        role="radio"
+        aria-checked={value === item.value}
+        className={`cd-reason cd-reason--${item.tone}${
+          value === item.value ? " is-on" : ""
+        }`}
+        onClick={() => onChange?.(item.value)}
+      >
+        <span className="cd-reason__icon">{item.icon}</span>
+        <span className="cd-reason__text">
+          <b>{item.value}</b>
+          <small>{item.hint}</small>
+        </span>
+        <span className="cd-reason__check" aria-hidden="true" />
+      </button>
+    ))}
+  </div>
+);
 
 const formatDate = (value) => {
   if (!value) return "—";
@@ -408,7 +482,7 @@ const ContractDetailPage = () => {
       setSubmittingAction(true);
 
       await terminateContract(contract.id, {
-        terminationReason: values.terminationReason.trim(),
+        terminationReason: values.terminationReason,
       });
 
       notify({
@@ -1132,23 +1206,10 @@ const ContractDetailPage = () => {
             name="terminationReason"
             label="Lý do chấm dứt"
             rules={[
-              {
-                required: true,
-                whitespace: true,
-                message: "Vui lòng nhập lý do chấm dứt hợp đồng",
-              },
-              {
-                max: 5000,
-                message: "Lý do tối đa 5000 ký tự",
-              },
+              { required: true, message: "Vui lòng chọn lý do chấm dứt" },
             ]}
           >
-            <Input.TextArea
-              rows={4}
-              maxLength={5000}
-              showCount
-              placeholder="Nhập lý do chấm dứt hợp đồng"
-            />
+            <ReasonPicker />
           </Form.Item>
         </Form>
       </Modal>
